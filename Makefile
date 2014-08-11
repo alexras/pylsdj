@@ -1,0 +1,2 @@
+test:
+	pypy -m nose .
