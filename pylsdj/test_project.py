@@ -6,13 +6,13 @@ SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(os.path.join(SCRIPT_DIR, os.path.pardir))
 
 import filepack as filepack
-from project import Project, load_project
+from project import Project, load_lsdsng, load_srm
 
 def test_save_load_lsdsng():
     sample_song_compressed = os.path.join(
         SCRIPT_DIR, "test_data", "UNTOLDST.lsdsng")
 
-    proj = load_project(sample_song_compressed)
+    proj = load_lsdsng(sample_song_compressed)
 
     expected_song_name = "UNTOLDST"
     expected_song_version = 23
@@ -28,7 +28,7 @@ def test_save_load_lsdsng():
 
         proj.save(tmp_abspath)
 
-        read_project = load_project(tmp_abspath)
+        read_project = load_lsdsng(tmp_abspath)
 
         assert_equal(proj, read_project)
     finally:
@@ -77,11 +77,17 @@ def test_read_write_project():
 def test_block_remap_required():
     block_remap_song = os.path.join(SCRIPT_DIR, "test_data", "ANNARKTE.lsdsng")
 
-    proj = load_project(block_remap_song)
+    proj = load_lsdsng(block_remap_song)
 
     assert_equal("ANNARKTE", proj.name)
     assert_equal(3, proj.version)
     assert_equal(4, proj.size_blks)
 
+def test_srm_load():
+    srm_song = os.path.join(SCRIPT_DIR, "test_data", "sample.srm")
+
+    proj = load_srm(srm_song)
+    assert_equal("CLICK", proj.song.instruments[0].name)
+
 if __name__ == "__main__":
-    test_block_remap_required()
+    test_srm_load()
