@@ -1,6 +1,4 @@
-from rich_comparable_mixin import RichComparableMixin
-
-class Clock(RichComparableMixin):
+class Clock(object):
     """LSDJ has a couple of clocks (the current session time, and the total
     session time). Each clock has a checksum, which is one more way of making
     sure battery RAM isn't corrupted."""
@@ -45,3 +43,9 @@ class Clock(RichComparableMixin):
     def __repr__(self):
         return "%d days, %d hours, %d minutes" % \
             (self.days, self.hours, self.minutes)
+
+    def __eq__(self, other):
+        return type(self) == type(other) and self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
