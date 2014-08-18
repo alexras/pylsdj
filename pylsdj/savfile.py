@@ -54,6 +54,13 @@ class SAVFile(object):
     EMPTY_BLOCK = 0xff
 
     def __init__(self, filename, callback=_noop_callback):
+        """Constructor.
+
+        :param filename: the file to open
+        :type name: str
+        :param callback: a progress callback function
+        :type name: function
+        """
         with open(filename, 'rb') as fp:
             self._load(fp, callback)
 
@@ -169,6 +176,7 @@ class SAVFile(object):
 
     @property
     def project_list(self):
+        """The list of :ref:`project` s that the .sav file contains"""
         return [(i, self.projects[i]) for i in sorted(self.projects.keys())]
 
     def _save(self, fp, callback):
@@ -266,6 +274,13 @@ class SAVFile(object):
         callback("Save complete!", total_steps, total_steps, True)
 
     def save(self, filename, callback=_noop_callback):
+        """Save this file.
+
+        :param filename: the file to which to save the .sav file
+        :type filename: str
+        :param callback: a progress callback function
+        :type callback: function
+        """
         with open(filename, 'wb') as fp:
             self._save(fp, callback)
 
