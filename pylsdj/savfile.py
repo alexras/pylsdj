@@ -208,7 +208,8 @@ class SAVFile(object):
             if project is None:
                 continue
 
-            callback("Marshaling song '%s'" % (project.name),
+            callback("Marshaling song '%s'" %
+                     (utils.name_without_zeroes(project.name)),
                      current_step - 1, total_steps, True)
 
             raw_data = project.get_raw_data()
