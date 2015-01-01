@@ -14,6 +14,7 @@ Contents:
    intro
    savfile
    project
+   chain
 
 Indices and tables
 ==================

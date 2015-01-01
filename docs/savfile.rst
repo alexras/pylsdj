@@ -3,15 +3,44 @@
 
 pylsdj manipulates .sav files through a :py:class:`pylsdj.SAVFile` object. This object can be used to load, store, and edit the contents of LSDJ's SRAM file.
 
+If you're writing an application using pylsdj, you'll probably want to load and store it.
+
+Callback Functions
+==================
+
 Several methods of :py:class:`pylsdj.SAVFile` take a progress callback function that callers can use to notify callers of how far the operation has progressed. Callback functions take four arguments
 
-* message: a message explaining what the step is doing
-* step: the step that the operation is currently on
-* total_steps: the total number of steps in the operation
-* continuing: True if the operation is going to continue
+* ``message``: a message explaining what the step is doing
+* ``step``: the step that the operation is currently on
+* ``total_steps``: the total number of steps in the operation
+* ``continuing``: True if the operation is going to continue
 
-The :py:class:`pylsdj.SAVFile` is described below. There's not a lot to it, since it's just a container for projects.
+Usage Examples
+==============
+
+.. code-block:: python
+
+
+   from pylsdj import SAVFile
+
+   # Load .sav file from lsdj.sav
+   sav = SAVFile('lsdj.sav')
+
+   # Load a .sav file, passing loading progress to a callback
+   def my_callback(message, step, total_steps, continuing):
+     print '%(m)s: %(s)d/%(t)d complete!' % { m: message, s: step, t: total_steps }
+
+   sav = SAVFile('lsdj.sav', my_callback)
+
+   # Get the list of the file's projects
+   projects = sav.project_list
+
+   # Save a savfile as lsdj_modified.sav, passing the same progress callback
+   # from the above example
+   sav.save('lsdj_modified.sav', my_callback)
+
+API Documentation
+=================
 
 .. autoclass:: pylsdj.SAVFile
    :members:
-   :special-members:

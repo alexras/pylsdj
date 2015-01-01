@@ -1,4 +1,4 @@
-ntroduction
+Introduction
 ------------
 
 What is LSDJ?
@@ -19,7 +19,7 @@ Before pylsdj, the suite of tools available for interacting with LSDJ's save dat
 How Can I Help?
 ===============
 
-First and foremost, use it! You can also try out LSMC_, which is basically a GUI on top of many of pylsdj's functions.
+First and foremost, use it! You can also try out LSMC_, which is really just a GUI on top of many of pylsdj's functions.
 
 Second, if you find a bug, file it. I know I haven't hit all the potential use cases for this in tests, and your input will help me find and squash bugs.
 
