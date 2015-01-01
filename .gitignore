@@ -3,3 +3,7 @@ dist
 *.pyc
 docs/_build
 .DS_Store
+.Python
+bin/
+include/
+lib/
