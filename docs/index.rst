@@ -12,9 +12,12 @@ Contents:
    :maxdepth: 2
 
    intro
+   filepack
    savfile
    project
    chain
+   clock
+   instrument
 
 Indices and tables
 ==================

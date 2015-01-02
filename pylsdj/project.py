@@ -9,6 +9,12 @@ import blockutils
 from blockutils import BlockReader, BlockWriter, BlockFactory
 
 def load_lsdsng(filename):
+    """Load a Project from a ``.lsdsng`` file.
+
+    :param filename: the name of the file from which to load
+    :rtype: :py:class:`pylsdj.Project`
+    """
+
     # Load preamble data so that we know the name and version of the song
     with open(filename, 'rb') as fp:
         preamble_data = bread.parse(fp, spec.lsdsng_preamble)
@@ -47,6 +53,12 @@ def load_lsdsng(filename):
         return Project(name, version, size_blks, raw_data)
 
 def load_srm(filename):
+    """Load a Project from an ``.srm`` file.
+
+    :param filename: the name of the file from which to load
+    :rtype: :py:class:`pylsdj.Project`
+    """
+
     # .srm files are just decompressed projects without headers
 
     # In order to determine the file's size in compressed blocks, we have to
@@ -72,12 +84,18 @@ def load_srm(filename):
 class Project(object):
     def __init__(self, name, version, size_blks, data):
         self.name = name
+        """the project's name"""
+
         self.version = version
+        """the project's version (incremented on every save in LSDJ)"""
 
         self._song_data = bread.parse(data, spec.song)
 
         self.song = Song(self._song_data)
+        """the song associated with the project"""
+
         self.size_blks = size_blks
+        """the size of the song in filesystem blocks"""
 
         # Useful for applications tracking whether a project was modified since
         # it was loaded.
@@ -87,6 +105,10 @@ class Project(object):
         return bread.write(self._song_data, spec.song)
 
     def save(self, filename):
+        """Save a project in .lsdsng format to the target file.
+
+        :param filename: the name of the file to which to save
+        """
         with open(filename, 'wb') as fp:
             writer = BlockWriter()
             factory = BlockFactory()

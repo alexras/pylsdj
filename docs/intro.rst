@@ -33,7 +33,7 @@ pylsdj only works on save data for LSDJ versions 3.0.0 and above. Given that ver
 Terminology Primer
 ------------------
 
-LSDJ's save data is stored in the Game Boy's battery RAM. LSDJ's file manager can hold up to 32 **songs** (also known as **projects**). Songs are stored in the file manager in a compressed form and a song is expanded into memory when it's being worked on.
+LSDJ's save data is stored in the Game Boy's battery RAM. LSDJ's file manager can hold up to 32 songs. Songs are stored in the file manager in a compressed form and a song is expanded into memory when it's being worked on.
 
 The Game Boy has four audio channels: two pulse wave generators, a PCM 4-bit wave sample, and a noise generator. A song consists of a sequence of **chains**, one for each channel. Each chain consists of a sequence of **phrases**, and a phrase contains up to 16 notes.
 
