@@ -3,6 +3,14 @@ class Clock(object):
     session time). Each clock has a checksum, which is one more way of making
     sure battery RAM isn't corrupted."""
     def __init__(self, clock_data):
+        """Constructor.
+
+        Will check that the clock's checksum matches its other fields to make
+        sure the clock isn't corrupted.
+
+        :param clock_data: raw clock data from the parent song
+
+        """
         assert (clock_data.checksum ==
                 clock_data.days + clock_data.hours + clock_data.minutes)
         self._clock_data = clock_data
@@ -15,6 +23,7 @@ class Clock(object):
 
     @property
     def days(self):
+        """The total number of days on the clock."""
         return self._clock_data.days
 
     @days.setter
@@ -24,6 +33,7 @@ class Clock(object):
 
     @property
     def hours(self):
+        """The total number of hours on the clock."""
         return self._clock_data.hours
 
     @hours.setter
@@ -33,6 +43,7 @@ class Clock(object):
 
     @property
     def minutes(self):
+        """The total number of minutes on the clock."""
         return self._clock_data.minutes
 
     @minutes.setter
