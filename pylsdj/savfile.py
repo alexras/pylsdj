@@ -176,7 +176,7 @@ class SAVFile(object):
 
     @property
     def project_list(self):
-        """The list of :ref:`project.Project` s that the .sav file contains"""
+        """The list of :py:class:`pylsdj.Project` s that the .sav file contains"""
         return [(i, self.projects[i]) for i in sorted(self.projects.keys())]
 
     def _save(self, fp, callback):

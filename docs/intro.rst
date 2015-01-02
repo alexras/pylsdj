@@ -30,6 +30,8 @@ Known Limitations
 
 pylsdj only works on save data for LSDJ versions 3.0.0 and above. Given that version 3.0.0 came out back in 2006 and marked a significant change in file structure, I feel like this is a reasonable point at which to freeze backwards-compatibility.
 
+There are parts of the codebase that are much more messy than I'd like them to be, but perfect is the enemy of done.
+
 Terminology Primer
 ------------------
 

@@ -29,6 +29,7 @@ class Instrument(object):
 
     @property
     def name(self):
+        """the instrument's name (5 characters, zero-padded)"""
         return self.song.song_data.instrument_names[self.index]
 
     @name.setter
@@ -37,6 +38,7 @@ class Instrument(object):
 
     @property
     def type(self):
+        """the instrument's type (pulse, wave, kit or noise)"""
         return self.data.instrument_type
 
     @type.setter
