@@ -106,10 +106,15 @@ pulse_instrument = [
     ("sound_length", b.intX(6)),
     ("sweep", b.byte),
     b.padding(3),
-    ("automate_1", b.boolean),
+    ("automate", b.boolean),
     ("automate_2", b.boolean),
     ("vibrato", [
-        ("type",b.semi_nibble),
+        ("type",b.enum(2, {
+            0: "hf",
+            1: "sawtooth",
+            2: "sine",
+            3: "square"
+        })),
         ("direction", b.enum(1, {
             0: "down",
             1: "up"
@@ -118,7 +123,12 @@ pulse_instrument = [
     b.padding(2),
     ("table_on", b.boolean),
     ("table", b.intX(5)),
-    ("wave", b.semi_nibble),
+    ("wave", b.enum(2, {
+        0: "12.5%",
+        1: "25%",
+        2: "50%",
+        3: "75%"
+    })),
     ("phase_finetune", b.nibble),
     ("pan", b.enum(2, {
         0: "Invalid",
@@ -145,10 +155,15 @@ wave_instrument = [
     ("synth", b.nibble),
     ("repeat", b.nibble),
     b.padding(8 * 2 + 3),
-    ("automate_1", b.boolean),
+    ("automate", b.boolean),
     ("automate_2", b.boolean),
     ("vibrato", [
-        ("type",b.semi_nibble),
+        ("type",b.enum(2, {
+            0: "hf",
+            1: "sawtooth",
+            2: "sine",
+            3: "square"
+        })),
         ("direction", b.enum(1,{
             0: "down",
             1: "up"
@@ -181,16 +196,21 @@ kit_instrument = [
     ("volume", b.byte),
     ("keep_attack_1", b.boolean),
     ("half_speed", b.boolean),
-    ("kit", b.intX(6), {"offset": 1}),
+    ("kit_1", b.intX(6), {"offset": 1}),
     # 0 == "auto"
     ("length_1", b.byte),
     b.padding(9),
     ("loop_1", b.boolean),
     ("loop_2", b.boolean),
-    ("automate_1", b.boolean),
+    ("automate", b.boolean),
     ("automate_2", b.boolean),
     ("vibrato", [
-        ("type",b.semi_nibble),
+        ("type",b.enum(2, {
+            0: "hf",
+            1: "sawtooth",
+            2: "sine",
+            3: "square"
+        })),
         ("direction", b.enum(1,{
             0: "down",
             1: "up"
@@ -218,7 +238,7 @@ kit_instrument = [
     })),
     # 0 == "auto"
     ("length_2", b.byte),
-    ("offset", b.byte),
+    ("offset_1", b.byte),
     ("offset_2", b.byte),
     b.padding(8 * 2)
 ]
@@ -235,7 +255,7 @@ noise_instrument = [
     ("sound_length", b.intX(6)),
     ("sweep", b.byte),
     b.padding(3),
-    ("automate_1", b.boolean),
+    ("automate", b.boolean),
     ("automate_2", b.boolean),
     b.padding(5),
     ("table_on", b.boolean),
