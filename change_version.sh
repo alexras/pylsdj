@@ -18,4 +18,5 @@ sed -i .bak -e "s/version='.*'/version='${version}'/g" setup.py
 find . -name "*.bak" -exec rm {} \;
 
 # Tag revision as this version in git
+git commit -a -m "Bumping version to ${git_tag}"
 git tag ${git_tag}
