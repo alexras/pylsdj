@@ -93,7 +93,7 @@ def test_default_instr_compress():
 
     data = bytearray(data)
 
-    compressed = filepack.compress(data, test=True)
+    compressed = filepack.compress(data)
 
     assert_bytearray_equal(bytearray(compressed + [0]), reference)
 
@@ -131,7 +131,7 @@ def test_default_wave_compress():
     for i in xrange(33):
         data.extend(filepack.DEFAULT_WAVE)
 
-    compressed = filepack.compress(data, test=True)
+    compressed = filepack.compress(data)
 
     reference = [filepack.SPECIAL_BYTE, filepack.DEFAULT_WAVE_BYTE, 33]
 

@@ -43,6 +43,16 @@ STATE_DEFAULT_WAVE = 5
 STATE_DONE = 6
 
 def split(compressed_data, segment_size, block_factory):
+    """Splits compressed data into blocks.
+
+    :param compressed_data: the compressed data to split
+    :param segment_size: the size of a block in bytes
+    :param block_factory: a BlockFactory used to construct the blocks
+
+    :rtype: a list of block IDs of blocks that the block factory created while
+    splitting
+    """
+
     # Split compressed data into blocks
     segments = []
 
@@ -128,6 +138,13 @@ def split(compressed_data, segment_size, block_factory):
     return block_ids
 
 def renumber_block_keys(blocks):
+    """Renumber a block map's indices so that tehy match the blocks' block
+    switch statements.
+
+    :param blocks a block map to renumber
+    :rtype: a renumbered copy of the block map
+    """
+
     # There is an implicit block switch to the 0th block at the start of the
     # file
     byte_switch_keys = [0]
@@ -183,6 +200,12 @@ def renumber_block_keys(blocks):
     return new_block_map
 
 def merge(blocks):
+    """Merge the given blocks into a contiguous block of compressed data.
+
+    :param blocks: the list of blocks
+    :rtype: a list of compressed bytes
+    """
+
     current_block = blocks[sorted(blocks.keys())[0]]
 
     compressed_data = []
@@ -234,18 +257,34 @@ def merge(blocks):
     return compressed_data
 
 def add_eof(segment):
+    """Add an EOF statement to a block."""
     segment.extend([SPECIAL_BYTE, EOF_BYTE])
 
 def add_block_switch(segment, block_id):
+    """Add a block switch statement to a block.
+
+    :param segment: the segment to which to add the statement
+    :param block_id: the block ID to which the switch statement should switch
+    """
     segment.extend([SPECIAL_BYTE, block_id])
 
 def pad(segment, size):
+    """Add zeroes to a segment until it reaches a certain size.
+
+    :param segment: the segment to pad
+    :param size: the size to which to pad the segment
+    """
     for i in xrange(size - len(segment)):
         segment.append(0)
 
     assert len(segment) == size
 
 def decompress(compressed_data):
+    """Decompress data that has been compressed by the filepack algorithm.
+
+    :param compressed_data: an array of compressed data bytes to decompress
+
+    :rtype: an array of decompressed bytes"""
     raw_data = []
 
     index = 0
@@ -292,7 +331,13 @@ def decompress(compressed_data):
 
     return raw_data
 
-def compress(raw_data, test=False):
+def compress(raw_data):
+    """Compress raw bytes with the filepack algorithm.
+
+    :param raw_data: an array of raw data bytes to compress
+
+    :rtype: a list of compressed bytes
+    """
     raw_data = bytearray(raw_data)
     compressed_data = []
 
