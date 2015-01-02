@@ -17,3 +17,4 @@ from song import Song, Sequence
 from speech_instrument import Word, SpeechInstrument
 from synth import Synth
 from table import Table
+import exceptions

@@ -8,9 +8,29 @@ its parent song's ``instruments`` field.
 Importing and Exporting Instruments
 ===================================
 
-Instruments know how to import and export themselves.
+Instruments know how to import and export themselves. They export in what I'm
+calling ``lsdinst`` format, which is really just a JSON encoding of the
+instrument's data.
 
-FIXME finish
+.. autoclass:: pylsdj.Instrument
+   :members: import_from_file, export_to_file
+
+Usage Examples
+^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   # Editing a song's instrument $06
+   instrument = song.instruments[0x06]
+
+   # Change the instrument's name
+   instrument.name = "ABCDE"
+
+   # Export the instrument to a file
+   instrument.export_to_file("my_instrument.lsdinst")
+
+   # Import the instrument, overwriting instrument $09
+   song.instruments[0x09].import_from_file("my_instrument.lsdinst")
 
 
 Instrument Fields

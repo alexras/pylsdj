@@ -7,6 +7,8 @@ import bread_spec
 from filepack import DEFAULT_INSTRUMENT
 from synth import Synth
 
+from exceptions import ImportException
+
 def new_default_instrument(instr_type):
     instr_data = DEFAULT_INSTRUMENT[:]
 
@@ -83,7 +85,26 @@ class Instrument(object):
         else:
             return available_synths.pop()
 
-    def import_lsdinst(self, lsdinst_struct):
+    def import_from_file(self, filename):
+        """Import this instrument's settings from the given file. Will
+        automatically add the instrument's synth and table to the song's
+        synths and tables if needed.
+
+        :param filename: the file from which to load
+
+        :raises ImportException: if importing failed, usually because the song
+          doesn't have enough synth or table slots left for the instrument's
+          synth or table
+        """
+        with open(filename, 'r') as fp:
+            failure_message = self.import_from_struct(json.load(fp))
+
+            if failure_message is not None:
+                raise exceptions.ImportException(failure_message)
+
+        return None
+
+    def import_from_struct(self, lsdinst_struct):
         instr_type = lsdinst_struct['data']['instrument_type']
 
         # Make sure we've got enough space for the synth if we need one
@@ -141,7 +162,17 @@ class Instrument(object):
             else:
                 setattr(output_data, key, import_data[key])
 
-    def export(self):
+    def export_to_file(self, filename):
+        """Export this instrument's settings to a file.
+
+        :param filename: the name of the file
+        """
+        instr_json = self.export_struct()
+
+        with open(filename, 'w') as fp:
+            json.dump(instr_json, fp, indent=2)
+
+    def export_struct(self):
         export_struct = {}
 
         export_struct['name'] = self.name
