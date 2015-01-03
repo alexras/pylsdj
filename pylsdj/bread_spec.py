@@ -86,7 +86,7 @@ STEPS_PER_GROOVE = 16
 STEPS_PER_TABLE = 16
 
 # Max. length of a "word"
-WORD_LENGTH = 0x20
+WORD_LENGTH = 0x10
 
 # Number of "words" in the speech instrument
 NUM_WORDS = 42
@@ -344,6 +344,72 @@ table_command = [
     ("val", b.array(NUM_TABLES, b.array(STEPS_PER_TABLE, b.byte)))
 ]
 
+word_sound = [
+    ("allophone", b.enum(8, {
+        0: '-',
+        1: 'AA',
+        2: 'AE',
+        3: 'AO',
+        4: 'AR',
+        5: 'AW',
+        6: 'AX',
+        7: 'AY',
+        8: 'BB1',
+        9: 'BB2',
+        10: 'CH',
+        11: 'DD1',
+        12: 'DD2',
+        13: 'DH1',
+        14: 'DH2',
+        15: 'EH',
+        16: 'EL',
+        17: 'ER1',
+        18: 'ER2',
+        19: 'EY',
+        20: 'FF',
+        21: 'GG1',
+        22: 'GG2',
+        23: 'GG3',
+        24: 'HH1',
+        25: 'HH2',
+        26: 'IH',
+        27: 'IY',
+        28: 'JH',
+        29: 'KK1',
+        30: 'KK2',
+        31: 'KK3',
+        32: 'LL',
+        33: 'MM',
+        34: 'NG',
+        35: 'NN1',
+        36: 'NN2',
+        37: 'OR',
+        38: 'OW',
+        39: 'OY',
+        40: 'PP',
+        41: 'RR1',
+        42: 'RR2',
+        43: 'SH',
+        44: 'SS',
+        45: 'TH',
+        46: 'TT1',
+        47: 'TT2',
+        48: 'UH',
+        49: 'UW1',
+        50: 'UW2',
+        51: 'VV',
+        52: 'WH',
+        53: 'WW',
+        54: 'XR',
+        55: 'YR',
+        56: 'YY1',
+        57: 'YY2',
+        58: 'ZH',
+        59: 'ZZ'
+    })),
+    ("length", b.byte)
+]
+
 song = [
     ("phrase_notes", b.array(NUM_PHRASES, b.array(STEPS_PER_PHRASE, b.byte))),
     ("bookmarks", b.array(64, b.byte)),
@@ -351,7 +417,7 @@ song = [
     ("grooves", b.array(NUM_GROOVES, b.array(STEPS_PER_GROOVE, b.byte))),
     ("song", b.array(NUM_SONG_CHAINS, chain)),
     ("table_envelopes", b.array(NUM_TABLES, b.array(STEPS_PER_TABLE, b.byte))),
-    ("words", b.array(NUM_WORDS, b.array(WORD_LENGTH, b.byte))),
+    ("words", b.array(NUM_WORDS, b.array(WORD_LENGTH, word_sound))),
     ("word_names", b.array(NUM_WORDS, b.string(4))),
     # Set to 'rb' on init
     ("mem_init_flag_1", b.string(2)),
