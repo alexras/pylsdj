@@ -20,6 +20,8 @@ Contents:
    phrase
    clock
    instrument
+   synth
+   speech_instrument
 
 Indices and tables
 ==================

@@ -43,8 +43,8 @@ Usage Examples
 
    sav = SAVFile('lsdj.sav', my_callback)
 
-   # Get the list of the file's projects
-   projects = sav.project_list
+   # Get the file's project map (maps slot number to Project)
+   projects = sav.projects
 
    # Save a savfile as lsdj_modified.sav, passing the same progress callback
    # from the above example
