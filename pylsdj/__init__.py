@@ -15,6 +15,6 @@ from project import load_lsdsng, load_srm, Project
 from savfile import SAVFile
 from song import Song, Sequence
 from speech_instrument import Word, SpeechInstrument
-from synth import Synth
+from synth import Synth, SynthSoundParams
 from table import Table
 import exceptions
