@@ -23,6 +23,8 @@ Usage Examples
    # Convert the .srm project to .lsdsng
    srm_proj.save("test1_conv.lsdsng")
 
+   # Get the srm project's song
+   song = srm_proj.song
 
 API Documentation
 =================

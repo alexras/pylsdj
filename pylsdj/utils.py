@@ -7,7 +7,7 @@ def printable_decimal_and_hex(num):
     return "{0:d} (0x{0:x})".format(num)
 
 def add_song_data_property(clazz, property_name, song_data_field_path,
-                           use_index=False):
+                           use_index=False, doc=None):
     """Add a property to the class `clazz` named `property_name`. This
     property's getter will return the field in self.song.song_data
     corresponding to `song_data_field_path`, and its setter will set that
@@ -37,7 +37,8 @@ def add_song_data_property(clazz, property_name, song_data_field_path,
         else:
             setattr(data_obj, song_data_field_path[-1], field_val)
 
-    setattr(clazz, property_name, property(fset=set_field, fget=get_field))
+    setattr(clazz, property_name, property(
+        fset=set_field, fget=get_field, doc=doc))
 
 def assert_index_sane(index, upper_bound_exclusive):
     assert type(index) == int, "Indices should be integers; '%s' is not" % (

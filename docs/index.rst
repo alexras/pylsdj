@@ -15,7 +15,9 @@ Contents:
    filepack
    savfile
    project
+   song
    chain
+   phrase
    clock
    instrument
 

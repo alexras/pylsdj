@@ -253,22 +253,29 @@ class Song(object):
 
     @property
     def instruments(self):
+        """the song's instrument table, represented as a list of
+        Instrument objects"""
         return self._instruments
 
     @property
     def phrases(self):
+        """the song's phrase table, represented as a list of Phrase objects"""
         return self._phrases
 
     @property
     def chains(self):
+        """the song's chain table, represented as a list of Chain objects"""
         return self._chains
 
     @property
     def grooves(self):
+        """the song's groove table"""
         return self._grooves
 
     @property
     def speech_instrument(self):
+        """the song's speech instrument settings, represented as a
+        SpeechInstrument object"""
         return self._speech_instrument
 
     @property
@@ -277,14 +284,19 @@ class Song(object):
 
     @property
     def clock(self):
+        """the amount of time LSDJ has been used since the last memory
+        reset, represented as a Clock object"""
         return Clock(self.song_data.clock)
 
     @property
     def global_clock(self):
+        """the amount of time LSDJ has been used total, represented
+        as a Clock object"""
         return Clock(self.song_data.global_clock)
 
     @property
     def song_version(self):
+        """the song's version number"""
         return self.song_data.version
 
     @song_version.setter
@@ -293,22 +305,41 @@ class Song(object):
 
     @property
     def sequence(self):
+        """the song's sequence, showing the order in which chains are
+        played on each of the four channels"""
         return self._sequence
 
     @property
     def tables(self):
+        """the song's table of macro tables, represented as Table objects"""
         return self._tables
 
 # For fields with a one-to-one correspondence with song data, we'll
 # programmatically insert properties to avoid repetition
-for field in ["tempo", "tune_setting", "key_delay", "key_repeat",
-              "font", "sync_setting", "colorset", "clone",
-              "file_changed", "power_save", "prelisten", "bookmarks",
-              "wave_synth_overwrite_lock"]:
+for field, doc in [("tempo", "the song's tempo"),
+                   ("tune_setting", None),
+                   ("key_delay", "the delay before key repeat is activated "
+                    "for Game Boy buttons"),
+                   ("key_repeat", "the key repeat speed for Game Boy buttons"),
+                   ("font", "the selected LSDJ font"),
+                   ("sync_setting", 'LSDJ\'s sync setting; one of ``"off"``, '
+                    '``"slave"``, ``"master"``, ``"midi"``, ``"nano"``, and '
+                    '``"keyboard"``'),
+                   ("colorset", "the selected LSDJ colorset"),
+                   ("clone", 'chain cloning depth; one of '
+                    '``"deep"``, ``"slim"``'),
+                   ("file_changed", "``1`` if the file has changed since last "
+                    "save, ``0`` otherwise"),
+                   ("power_save", None),
+                   ("prelisten", "if non-zero, play notes and instruments "
+                    "while entering them"),
+                   ("bookmarks", "list of screen bookmarks"),
+                   ("wave_synth_overwrite_lock", None)]:
     def field_getter(this):
         return getattr(this.song_data, field)
 
     def field_setter(this, value):
         setattr(this.song_data, field, value)
 
-    setattr(Song, field, property(fset=field_setter, fget=field_getter))
+    setattr(Song, field, property(fset=field_setter, fget=field_getter,
+                                  doc=doc))
