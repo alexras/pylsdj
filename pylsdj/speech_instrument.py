@@ -9,13 +9,25 @@ def word_cleanup(word):
 
 class Word(object):
     def __init__(self, song, index):
-        self.song = song
-        self.index = index
+        self._song = song
+        """the word's parent song"""
+
+        self._index = index
+        """the word's index within the speech instrument"""
+
+    @property
+    def song(self):
+        return self._song
+
+    @property
+    def index(self):
+        return self._index
 
 add_song_data_property(Word, 'name', ("word_names", ), use_index=True,
                        doc="the word's name")
 add_song_data_property(Word, 'sounds', ("words", ), use_index=True,
-                       doc="the sounds that make up the word")
+                       doc="a list of the sounds that make up the word; "
+                       "each sound has an ``allophone`` and a ``length``")
 
 class SpeechInstrument(object):
     def __init__(self, song):
@@ -32,5 +44,5 @@ class SpeechInstrument(object):
 
     @property
     def words(self):
-        """the speech instrument's defined words"""
+        """a list of the speech instrument's defined words, as Word objects"""
         return self._words
