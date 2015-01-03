@@ -391,7 +391,14 @@ song = [
     ("key_delay", b.byte),
     ("key_repeat", b.byte),
     ("font", b.byte),
-    ("sync_setting", b.byte),
+    ("sync_setting", b.enum(8, {
+        0: "off",
+        1: "slave",
+        2: "master",
+        3: "midi",
+        4: "nano",
+        5: "keyboard"
+    })),
     ("colorset", b.byte),
     b.padding(8),
     ("clone", b.enum(8, {
