@@ -16,5 +16,5 @@ from savfile import SAVFile
 from song import Song, Sequence
 from speech_instrument import Word, SpeechInstrument
 from synth import Synth, SynthSoundParams
-from table import Table
+from table import Table, TableFX
 import exceptions
