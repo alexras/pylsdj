@@ -21,6 +21,7 @@ Contents:
    clock
    instrument
    synth
+   table
    speech_instrument
 
 Indices and tables
