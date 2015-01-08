@@ -71,3 +71,6 @@ def name_without_zeroes(name):
         return name
     else:
         return str(name[:first_zero])
+
+def fixed_width_string(string, width, fill=' '):
+    return string[:width].ljust(fill)
