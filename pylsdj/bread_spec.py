@@ -527,3 +527,34 @@ lsdsng_preamble = [
     ("name", b.string(8)),
     ("version", b.byte)
 ]
+
+# 21 kit slots; 4 reserved for the speech synth
+NUM_ROM_KITS = 21
+SAMPLES_PER_KIT = 15
+KIT_SAMPLE_NAME_LENGTH = 3
+KIT_NAME_LENGTH = 6
+
+def hex_array(x):
+    return str(map(hex, x))
+
+# Individual kit layout
+lsdj_rom_kit = [
+    { "endianness": b.LITTLE_ENDIAN },
+    ("magic_number", b.array(2, b.uint8), { "str_format": hex_array }), # should be 0x60, 0x40
+    ("sample_ends", b.array(SAMPLES_PER_KIT, b.uint16)),
+    ("zeroes_1", b.uint16, { "str_format": hex }), # should be 0
+    ("sample_names", b.array(SAMPLES_PER_KIT, b.string(KIT_SAMPLE_NAME_LENGTH))), # when entering less than 3 chars, pad with '-'
+    ("zeroes_2", b.uint8, { "str_format": hex }), # should be 0
+    b.padding(2 * 8), # documented as 'N / A?'
+    ("kit_name", b.string(KIT_NAME_LENGTH)),
+    b.padding(4 * 8), # documented as 'N / A?'
+    ("force_loop", b.array(SAMPLES_PER_KIT + 1, b.boolean)), # MSB not used
+    b.padding(2 * 8), # documented as 'N / A?'
+    ("sample_data", b.array(16288 * 2, b.intX(4, True)))
+]
+
+# LSDJ kits layout in ROM
+lsdj_rom_kits = [
+    b.padding(0x20000 * 8),
+    ("kits", b.array(NUM_ROM_KITS, lsdj_rom_kit))
+]

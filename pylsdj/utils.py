@@ -43,9 +43,7 @@ def name_without_zeroes(name):
     else:
         return str(name[:first_zero])
 
-
 class temporary_file:
-
     def __enter__(self):
         (tmp_handle, tmp_abspath) = tempfile.mkstemp()
         os.close(tmp_handle)
@@ -55,3 +53,6 @@ class temporary_file:
     def __exit__(self, t, value, traceback):
         if hasattr(self, 'abspath') and self.abspath is not None:
             os.unlink(self.abspath)
+
+def fixed_width_string(string, width, fill=' '):
+    return string[:width].ljust(fill)

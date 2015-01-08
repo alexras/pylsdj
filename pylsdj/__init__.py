@@ -4,6 +4,7 @@ __author__ = 'Alex Rasmussen'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2015 Alex Rasmussen'
 
+
 from . import bread_spec
 from . import chain
 from . import clock
@@ -22,5 +23,6 @@ from .speech_instrument import Word, SpeechInstrument
 from .synth import Synth, SynthSoundParams
 from .table import Table, TableFX
 from .vibrato import Vibrato
+from .kits import Kits, Kit
 from . import exceptions
 from . import utils
