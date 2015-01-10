@@ -5,4 +5,7 @@ publish:
 	python setup.py sdist upload
 
 test:
+	python -m nose .
+
+test-pypy:
 	pypy -m nose .
