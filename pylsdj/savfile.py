@@ -11,6 +11,7 @@ from blockutils import BlockReader, BlockWriter, BlockFactory
 import filepack
 import collections
 import bitstring
+import exceptions
 
 # By default, SAV file loading doesn't trigger any callback action
 def _noop_callback(message, step, total_steps, continuing):
@@ -77,8 +78,11 @@ class SAVFile(object):
 
         header_block_data = fp.read(blockutils.BLOCK_SIZE)
 
-        self.header_block = bread.parse(
-            header_block_data, bread_spec.compressed_sav_file)
+        try:
+            self.header_block = bread.parse(
+                header_block_data, bread_spec.compressed_sav_file)
+        except bitstring.ReadError, e:
+            raise exceptions.ImportException(e)
 
         if self.header_block.sram_init_check != 'jk':
             error_msg = (
