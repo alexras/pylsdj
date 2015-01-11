@@ -1,5 +1,6 @@
 # pylsdj
 
+[![Build Status](https://travis-ci.org/alexras/pylsdj.svg)](https://travis-ci.org/alexras/pylsdj)
 
 [![Documentation Status](https://readthedocs.org/projects/pylsdj/badge/?version=latest)](https://readthedocs.org/projects/pylsdj/?badge=latest)
 
