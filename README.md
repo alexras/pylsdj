@@ -1,8 +1,6 @@
 # pylsdj
 
-[![Build Status](https://travis-ci.org/alexras/pylsdj.svg)](https://travis-ci.org/alexras/pylsdj)
-
-[![Documentation Status](https://readthedocs.org/projects/pylsdj/badge/?version=latest)](https://readthedocs.org/projects/pylsdj/?badge=latest)
+[![Build Status](https://travis-ci.org/alexras/pylsdj.svg)](https://travis-ci.org/alexras/pylsdj) [![Documentation Status](https://readthedocs.org/projects/pylsdj/badge/?version=latest)](https://readthedocs.org/projects/pylsdj/?badge=latest)
 
 pylsdj is a suite of tools for reading, writing and editing LSDJ’s save data,
 which includes the user’s saved songs and instruments.
