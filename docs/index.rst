@@ -23,6 +23,7 @@ Contents:
    synth
    table
    speech_instrument
+   utils
 
 Indices and tables
 ==================

@@ -18,3 +18,4 @@ from speech_instrument import Word, SpeechInstrument
 from synth import Synth, SynthSoundParams
 from table import Table, TableFX
 import exceptions
+import utils

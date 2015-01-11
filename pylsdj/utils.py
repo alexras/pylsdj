@@ -64,6 +64,9 @@ class ObjectLookupDict(object):
 def name_without_zeroes(name):
     """
     Return a human-readable name without LSDJ's trailing zeroes.
+
+    :param name: the name from which to strip zeroes
+    :rtype: the name, without trailing zeroes
     """
     first_zero = name.find('\0')
 
