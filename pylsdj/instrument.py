@@ -27,7 +27,7 @@ class Instrument(object):
 
     @property
     def type(self):
-        """the instrument's type (pulse, wave, kit or noise)"""
+        """the instrument's type (``pulse``, ``wave``, ``kit`` or ``noise``)"""
         return self.data.instrument_type
 
     @property

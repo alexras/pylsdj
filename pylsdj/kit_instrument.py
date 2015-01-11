@@ -120,8 +120,8 @@ class KitInstrument(Instrument, VibratoMixin):
 
     @property
     def dist_type(self):
-        """algorithm used when two kits are mixed together; 'clip', 'shape',
-        'shap2' or 'wrap'"""
+        """algorithm used when two kits are mixed together; ``clip``, ``shape``,
+        ``shap2`` or ``wrap``"""
         return self.data.dist_type
 
     @dist_type.setter

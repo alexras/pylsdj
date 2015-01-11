@@ -4,7 +4,8 @@ class Vibrato(object):
 
     @property
     def type(self):
-        """ 'hf' (for high frequency sine), 'sawtooth', 'saw' or 'square'"""
+        """ ``hf`` (for high frequency sine), ``sawtooth``,
+        ``saw`` or ``square``"""
         return self._data.type
 
     @type.setter

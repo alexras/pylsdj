@@ -33,7 +33,7 @@ class PulseInstrument(Instrument,
 
     @property
     def wave(self):
-        """the pulse's wave width; '12.5%', '25%', '50%' or '75%'"""
+        """the pulse's wave width; ``12.5%``, ``25%``, ``50%`` or ``75%``"""
         return self.data.wave
 
     @wave.setter

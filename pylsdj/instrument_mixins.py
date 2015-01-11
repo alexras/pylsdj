@@ -28,8 +28,8 @@ class VibratoMixin(object):
 class SoundLengthMixin(object):
     @property
     def sound_length(self):
-        """"the instrument sound's length, a 6-bit integer or 'unlimited' if the
-        sound plays forever"""
+        """the instrument sound's length, a 6-bit integer or ``unlimited``
+        if the sound plays forever"""
         if self.data.has_sound_length:
             return self.data.sound_length
         else:

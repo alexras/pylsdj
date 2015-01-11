@@ -9,7 +9,7 @@ class NoiseInstrument(Instrument, SoundLengthMixin, EnvelopeMixin, SweepMixin):
 
     @property
     def s_cmd(self):
-        """'free' or 'stable'. When free, altering noise shape with the
+        """``free`` or ``stable``. When free, altering noise shape with the
         S command can sometimes mute the sound. When stable, sound will never
         be muted by accident. My understanding is that this setting exists for
         backwards-compatibility of behavior in old LSDJ instruments"""

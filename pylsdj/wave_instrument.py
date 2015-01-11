@@ -39,8 +39,8 @@ class WaveInstrument(Instrument, VibratoMixin):
 
     @property
     def play_type(self):
-        """how to play the synth sound; 'once', 'loop', 'ping-pong',
-        or 'manual'"""
+        """how to play the synth sound; ``once``, ``loop``, ``ping-pong``,
+        or ``manual``"""
         return self.data.play_type
 
     @play_type.setter
