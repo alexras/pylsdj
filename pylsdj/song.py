@@ -9,6 +9,8 @@ from chain import Chain
 from speech_instrument import SpeechInstrument
 from instrument import Instrument
 
+from clock import Clock, TotalClock
+
 import StringIO
 
 # Number of channels
@@ -292,7 +294,7 @@ class Song(object):
     def global_clock(self):
         """the amount of time LSDJ has been used total, represented
         as a Clock object"""
-        return Clock(self.song_data.global_clock)
+        return TotalClock(self.song_data.total_clock)
 
     @property
     def song_version(self):

@@ -1,7 +1,31 @@
 class Clock(object):
-    """LSDJ has a couple of clocks (the current session time, and the total
-    session time). Each clock has a checksum, which is one more way of making
-    sure battery RAM isn't corrupted."""
+    def __init__(self, clock_data):
+        self._clock_data = clock_data
+
+    @property
+    def hours(self):
+        """The total number of hours on the clock."""
+        return self._clock_data.hours
+
+    @hours.setter
+    def hours(self, hours):
+        self._clock_data.hours = hours
+        self._update_checksum()
+
+    @property
+    def minutes(self):
+        """The total number of minutes on the clock."""
+        return self._clock_data.minutes
+
+    @minutes.setter
+    def minutes(self, minutes):
+        self._clock_data.minutes = minutes
+        self._update_checksum()
+
+    def __repr__(self):
+        return "%d hours, %d minutes" % (self.hours, self.minutes)
+
+class TotalClock(object):
     def __init__(self, clock_data):
         """Constructor.
 
