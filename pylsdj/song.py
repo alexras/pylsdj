@@ -1,3 +1,5 @@
+import json
+
 from utils import assert_index_sane
 import bread
 import bread_spec
@@ -7,7 +9,14 @@ from table import Table
 from phrase import Phrase
 from chain import Chain
 from speech_instrument import SpeechInstrument
-from instrument import Instrument
+
+from wave_instrument import WaveInstrument
+from pulse_instrument import PulseInstrument
+from kit_instrument import KitInstrument
+from noise_instrument import NoiseInstrument
+
+from bread_spec import INSTRUMENT_TYPE_CODE
+from filepack import DEFAULT_INSTRUMENT
 
 from clock import Clock, TotalClock
 
@@ -63,37 +72,48 @@ class Instruments(object):
         "noise": bread_spec.noise_instrument
     }
 
+    instrumentClasses = {
+        "pulse": PulseInstrument,
+        "wave": WaveInstrument,
+        "kit": KitInstrument,
+        "noise": NoiseInstrument
+    }
+
     def __init__(self, song):
         self.song = song
         self.alloc_table = song.song_data.instr_alloc_table
         self.access_objects = []
 
         for index in xrange(len(self.alloc_table)):
-            self.access_objects.append(Instrument(song, index))
+            instr_type = self.song.song_data.instruments[index].instrument_type
 
-    def set_instrument_type(self, index, instrument_type):
+            self.access_objects.append(
+                self.instrumentClasses[instr_type](song, index))
+
+    def _new_default_instrument(self, instr_type):
+        instr_data = DEFAULT_INSTRUMENT[:]
+        instr_data[0] = INSTRUMENT_TYPE_CODE[instr_type]
+        return bread.parse(instr_data, bread_spec.instrument)
+
+    def _set_instrument_type(self, index, instrument_type):
         assert instrument_type in Instruments.specs, (
             "Invalid instrument type '%s'" % (instrument_type))
 
         assert_index_sane(index, len(self.song.song_data.instruments))
 
-        # Need to change the structure of the song's data to match the new
-        # instrument type. We'll do this by creating the raw data for an
-        # instrument of the appropriate type, parsing a new instrument out of
-        # it, and sticking that into the appropriate place in the song's data.
+        current_access_object = self.access_objects[index]
 
-        instrument_length = len(self.song.song_data.instruments[index])
-
-        instrument_type_index = Instruments.specs.keys().index(
-            instrument_type)
-
-        empty_bytes = bytearray([instrument_type_index] +
-                                ([0] * (instrument_length - 1)))
-
-        parsed_instrument = bread.parse(
-            empty_bytes, Instruments.specs[instrument_type])
-
-        self.song.song_data.instruments[index] = parsed_instrument
+        # If this instrument is of a different type than we're currently
+        # storing, we've got to make a new one of the appropriate type into
+        # which to demarshal
+        if (current_access_object is None or
+            current_access_object.type != instrument_type):
+            self.access_objects[index] = (
+                self.instrumentClasses[instrument_type](self.song, index))
+            self.access_objects[index].data = self._new_default_instrument(
+                instrument_type)
+            self.song.song_data.instruments[index] = (
+                self.access_objects[index].data)
 
     def __getitem__(self, index):
         assert_index_sane(index, len(self.alloc_table))
@@ -108,8 +128,48 @@ class Instruments(object):
 
     def allocate(self, index, instrument_type):
         self.alloc_table[index] = True
-        self.set_instrument_type(index, instrument_type)
+        self._set_instrument_type(index, instrument_type)
 
+    def import_from_file(self, index, filename):
+        """Import this instrument's settings from the given file. Will
+        automatically add the instrument's synth and table to the song's
+        synths and tables if needed.
+
+        Note that this may invalidate existing instrument accessor objects.
+
+        :param index: the index into which to import
+
+        :param filename: the file from which to load
+
+        :raises ImportException: if importing failed, usually because the song
+          doesn't have enough synth or table slots left for the instrument's
+          synth or table
+        """
+
+        with open(filename, 'r') as fp:
+            self._import_from_struct(index, json.load(fp))
+
+    def _import_from_struct(self, index, lsdinst_struct):
+        instr_type = lsdinst_struct['data']['instrument_type']
+
+        self.allocate(index, instr_type)
+
+        instrument = self.song.instruments[index]
+        instrument.name = lsdinst_struct['name']
+
+        # Make sure we've got enough room for the table if we need it
+        if 'table' in lsdinst_struct:
+            table_index = self.song.tables.next_free()
+
+            if table_index is None:
+                raise ImportException(
+                    "No available table slot in which to store the "
+                    "instrument's table data")
+
+            self.song.tables.allocate(table_index)
+            instrument.table = self.song.tables[table_index]
+
+        instrument.import_lsdinst(lsdinst_struct)
 
 class Grooves(object):
     def __init__(self, song):
@@ -217,6 +277,10 @@ class Song(object):
         # it back out in the right format
         self.song_data = song_data
 
+        self._grooves = Grooves(self)
+        self._speech_instrument = SpeechInstrument(self)
+        self._synths = Synths(self)
+
         self._instruments = Instruments(self)
 
         # Stitch together allocated tables
@@ -236,10 +300,6 @@ class Song(object):
             song = self,
             alloc_table = self.song_data.chain_alloc_table,
             object_class = Chain)
-
-        self._grooves = Grooves(self)
-        self._speech_instrument = SpeechInstrument(self)
-        self._synths = Synths(self)
 
         self._sequence = Sequence(self)
 

@@ -84,7 +84,9 @@ class Table(object):
 
         return export_struct
 
-    def import_lsdinst(self, table_data):
+    def import_lsdinst(self, lsdinst_struct):
+        table_data = lsdinst_struct['table']
+
         for i, table_row in enumerate(table_data):
             self.envelopes[i] = table_row["volume"]
             self.transposes[i] = table_row["transpose"]

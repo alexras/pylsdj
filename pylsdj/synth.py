@@ -4,15 +4,32 @@ class SynthSoundParams(object):
     def __init__(self, params):
         self._params = params
 
+    def as_native(self):
+        return self._params.as_native()
+
+    def import_lsdinst(self, struct):
+        self.volume = struct['volume']
+        self.filter_cutoff = struct['filter_cutoff']
+        self.phase_amount = struct['phase_amount']
+        self.vertical_shift = struct['vertical_shift']
+
     @property
     def volume(self):
         """the wave's volume"""
         return self._params.volume
 
+    @volume.setter
+    def volume(self, value):
+        self._params.volume = value
+
     @property
     def filter_cutoff(self):
         """the filter's cutoff frequency"""
         return self._params.filter_cutoff
+
+    @filter_cutoff.setter
+    def filter_cutoff(self, value):
+        self._params.filter_cutoff = value
 
     @property
     def phase_amount(self):
@@ -20,10 +37,18 @@ class SynthSoundParams(object):
         ``0x1f`` = maximum phase"""
         return self._params.phase_amount
 
+    @phase_amount.setter
+    def phase_amount(self, value):
+        self._params.phase_amount = value
+
     @property
     def vertical_shift(self):
         """the amount to shift the waveform vertically"""
         return self._params.vertical_shift
+
+    @vertical_shift.setter
+    def vertical_shift(self, value):
+        self._params.vertical_shift = value
 
 
 class Synth(object):
@@ -66,11 +91,19 @@ class Synth(object):
         ``"square"``, ``"sine"``'''
         return self._params.waveform
 
+    @waveform.setter
+    def waveform(self, value):
+        self._params.waveform = value
+
     @property
     def filter_type(self):
         '''the type of filter applied to the waveform; one of
         ``"lowpass"``, ``"highpass"``, ``"bandpass"``, ``"allpass"``'''
         return self._params.filter_type
+
+    @filter_type.setter
+    def filter_type(self, value):
+        self._params.filter_type = value
 
     @property
     def filter_resonance(self):
@@ -78,16 +111,30 @@ class Synth(object):
         frequency, to change how bright or dull the wave sounds"""
         return self._params.filter_resonance
 
+    @filter_resonance.setter
+    def filter_resonance(self, value):
+        self._params.filter_resonance = value
+
     @property
     def distortion(self):
         '''use ``"clip"`` or ``"wrap"`` distortion'''
         return self._params.distortion
+
+    @distortion.setter
+    def distortion(self, value):
+        self._params.distortion = value
 
     @property
     def phase_type(self):
         '''compresses the waveform horizontally; one of
         ``"normal"``, ``"resync"``, ``"resync2"``'''
         return self._params.phase_type
+
+    @phase_type.setter
+    def phase_type(self, value):
+        '''compresses the waveform horizontally; one of
+        ``"normal"``, ``"resync"``, ``"resync2"``'''
+        self._params.phase_type = value
 
     @property
     def waves(self):
@@ -108,25 +155,17 @@ class Synth(object):
     def import_lsdinst(self, synth_data):
         params_native = self._params.as_native()
 
-        for key in params_native:
-            if key[0] == '_':
-                continue
+        import_keys = ['start', 'end', 'waveform', 'filter_type',
+                       'filter_resonance', 'distortion', 'phase_type']
+
+        for key in import_keys:
+            value = synth_data['params'][key]
 
             if key in ('start', 'end'):
-                self._import_sound_params(
-                    synth_data['params'][key], getattr(self, key))
+                getattr(self, key).import_lsdinst(value)
             else:
-                setattr(self._params, key, synth_data['params'][key])
+                setattr(self, key, value)
 
         for i, wave in enumerate(synth_data['waves']):
             for j, frame in enumerate(wave):
                 self.waves[i][j] = frame
-
-    def _import_sound_params(self, params, dest):
-        native_repr = dest.as_native()
-
-        for key in native_repr:
-            if key[0] == '_':
-                continue
-
-            setattr(dest, key, params[key])

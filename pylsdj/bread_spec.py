@@ -270,13 +270,17 @@ noise_instrument = [
     b.padding(8 * 8)
 ]
 
+INSTRUMENT_TYPE_CODE = {
+    "pulse": 0,
+    "wave": 1,
+    "kit": 2,
+    "noise": 3
+}
+
 instrument = [
-    ("instrument_type", b.enum(8, {
-        0: "pulse",
-        1: "wave",
-        2: "kit",
-        3: "noise"
-    }, default = "invalid")),
+    ("instrument_type", b.enum(
+        8, dict([(v, k) for (k, v) in INSTRUMENT_TYPE_CODE.items()]),
+        default = "invalid")),
     (b.CONDITIONAL, "instrument_type", {
         "pulse" : pulse_instrument,
         "wave" : wave_instrument,
