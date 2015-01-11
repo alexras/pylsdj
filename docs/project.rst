@@ -21,7 +21,7 @@ Usage Examples
    lsdsng_proj = load_srm("test2.lsdsng")
 
    # Convert the .srm project to .lsdsng
-   srm_proj.save("test1_conv.lsdsng")
+   srm_proj.save_lsdsng("test1_conv.lsdsng")
 
    # Get the srm project's song
    song = srm_proj.song

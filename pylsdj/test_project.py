@@ -26,7 +26,7 @@ def test_save_load_lsdsng():
         (tmp_handle, tmp_abspath) = tempfile.mkstemp()
         os.close(tmp_handle)
 
-        proj.save(tmp_abspath)
+        proj.save_lsdsng(tmp_abspath)
 
         read_project = load_lsdsng(tmp_abspath)
 
@@ -88,6 +88,25 @@ def test_srm_load():
 
     proj = load_srm(srm_song)
     assert_equal("CLICK", proj.song.instruments[0].name)
+
+def test_save_load_srm():
+    srm_song = os.path.join(SCRIPT_DIR, "test_data", "sample.srm")
+
+    proj = load_srm(srm_song)
+
+    try:
+        (tmp_proj_handle, tmp_proj_abspath) = tempfile.mkstemp()
+
+        os.close(tmp_proj_handle)
+
+        proj.save_srm(tmp_proj_abspath)
+
+        read_proj = load_srm(tmp_proj_abspath)
+
+        assert_equal(proj, read_proj)
+    finally:
+        if tmp_proj_abspath is not None:
+            os.unlink(tmp_proj_abspath)
 
 if __name__ == "__main__":
     test_srm_load()

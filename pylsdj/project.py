@@ -108,6 +108,8 @@ class Project(object):
         """Save a project in .lsdsng format to the target file.
 
         :param filename: the name of the file to which to save
+
+        :deprecated: use ``save_lsdsng(filename)`` instead
         """
         with open(filename, 'wb') as fp:
             writer = BlockWriter()
@@ -123,6 +125,22 @@ class Project(object):
 
             for key in sorted(factory.blocks.keys()):
                 fp.write(bytearray(factory.blocks[key].data))
+
+    def save_lsdsng(self, filename):
+        """Save a project in .lsdsng format to the target file.
+
+        :param filename: the name of the file to which to save
+        """
+        return self.save(filename)
+
+    def save_srm(self, filename):
+        """Save a project in .srm format to the target file.
+
+        :param filename: the name of the file to which to save
+        """
+        with open(filename, 'wb') as fp:
+            raw_data = bread.write(self._song_data, spec.song)
+            fp.write(raw_data)
 
     def __eq__(self, other):
         return self._song_data == other._song_data
