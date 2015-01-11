@@ -5,7 +5,7 @@ publish:
 	python setup.py sdist upload
 
 test:
-	python -m nose .
+	nosetests --with-coverage --cover-package=pylsdj .
 
 test-pypy:
 	pypy -m nose .
