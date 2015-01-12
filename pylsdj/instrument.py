@@ -91,7 +91,7 @@ class Instrument(object):
         data_json = json.loads(self.data.as_json())
 
         for key, value in data_json.items():
-            if key[0] != '_' or key in ('synth_index','table'):
+            if key[0] != '_' and key not in ('synth','table'):
                 export_struct['data'][key] = value
 
         if self.table is not None:
