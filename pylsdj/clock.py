@@ -10,7 +10,6 @@ class Clock(object):
     @hours.setter
     def hours(self, hours):
         self._clock_data.hours = hours
-        self._update_checksum()
 
     @property
     def minutes(self):
@@ -20,7 +19,6 @@ class Clock(object):
     @minutes.setter
     def minutes(self, minutes):
         self._clock_data.minutes = minutes
-        self._update_checksum()
 
     def __repr__(self):
         return "%d hours, %d minutes" % (self.hours, self.minutes)
@@ -29,14 +27,12 @@ class TotalClock(object):
     def __init__(self, clock_data):
         """Constructor.
 
-        Will check that the clock's checksum matches its other fields to make
-        sure the clock isn't corrupted.
+        We skip checksum computation on initial load, since LSDJ seems to be
+        just fine with the global clock checksum being incorrect.
 
         :param clock_data: raw clock data from the parent song
 
         """
-        assert (clock_data.checksum ==
-                clock_data.days + clock_data.hours + clock_data.minutes)
         self._clock_data = clock_data
 
     def _update_checksum(self):
@@ -74,6 +70,11 @@ class TotalClock(object):
     def minutes(self, minutes):
         self._clock_data.minutes = minutes
         self._update_checksum()
+
+    @property
+    def checksum(self):
+        """the clock's checksum (days + hours + minutes)"""
+        return self._clock_data.checksum
 
     def __repr__(self):
         return "%d days, %d hours, %d minutes" % \
