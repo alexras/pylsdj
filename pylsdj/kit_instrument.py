@@ -1,5 +1,4 @@
 from instrument import Instrument
-from bread_spec import INSTRUMENT_TYPE_CODE
 from instrument_mixins import VibratoMixin
 
 
@@ -140,7 +139,7 @@ class KitInstrument(Instrument, VibratoMixin):
         self.data.half_speed = value
 
     def import_lsdinst(self, lsdinst_struct):
-        super(PulseInstrument, self).import_lsdinst(lsdinst_struct)
+        super(KitInstrument, self).import_lsdinst(lsdinst_struct)
 
         self.volume = lsdinst_struct['data']['volume']
 
