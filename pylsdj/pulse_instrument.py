@@ -12,6 +12,17 @@ class PulseInstrument(Instrument,
     def __init__(self, song, index):
         super(PulseInstrument, self).__init__(song, index)
 
+    def __eq__(self, other):
+        return (super(PulseInstrument, self).__eq__(other) and
+                isinstance(other, PulseInstrument) and
+                self.phase_transpose == other.phase_transpose and
+                self.phase_finetune == other.phase_finetune and
+                self.wave == other.wave and
+                VibratoMixin.equal(self, other) and
+                SoundLengthMixin.equal(self, other) and
+                EnvelopeMixin.equal(self, other) and
+                SweepMixin.equal(self, other))
+
     @property
     def phase_transpose(self):
         """detune pulse channel 2 this many semitones; in LSDJ, this is

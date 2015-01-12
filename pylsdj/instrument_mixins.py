@@ -16,6 +16,10 @@ class EnvelopeMixin(object):
     def import_lsdinst(obj, struct_data):
         obj.envelope = struct_data['data']['envelope']
 
+    @staticmethod
+    def equal(a, b):
+        return (isinstance(a, EnvelopeMixin) and isinstance(b, EnvelopeMixin)
+                and a.envelope == b.envelope)
 
 class VibratoMixin(object):
 
@@ -27,6 +31,12 @@ class VibratoMixin(object):
     @staticmethod
     def import_lsdinst(obj, struct_data):
         Vibrato(obj.data.vibrato).import_lsdinst(struct_data)
+
+    @staticmethod
+    def equal(a, b):
+        return (isinstance(a, VibratoMixin) and isinstance(b, VibratoMixin)
+                and a.vibrato == b.vibrato)
+
 
 
 class SoundLengthMixin(object):
@@ -55,6 +65,11 @@ class SoundLengthMixin(object):
         else:
             obj.sound_length = 'unlimited'
 
+    @staticmethod
+    def equal(a, b):
+        return (isinstance(a, SoundLengthMixin)
+                and isinstance(b, SoundLengthMixin)
+                and a.sound_length == b.sound_length)
 
 class SweepMixin(object):
 
@@ -71,3 +86,8 @@ class SweepMixin(object):
     @staticmethod
     def import_lsdinst(obj, struct_data):
         obj.sweep = struct_data['data']['sweep']
+
+    @staticmethod
+    def equal(a, b):
+        return (isinstance(a, SweepMixin) and isinstance(b, SweepMixin)
+                and a.sweep == b.sweep)

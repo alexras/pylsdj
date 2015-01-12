@@ -26,6 +26,8 @@ class TableFX(object):
     def value(self, val):
         self._params.val[self._table_index][self._fx_index] = val
 
+    def __eq__(self, other):
+        return hasattr(other, '_params') and self._params == other._params
 
 class Table(object):
 
@@ -40,6 +42,9 @@ class Table(object):
                      for i in xrange(STEPS_PER_TABLE)]
         self._fx2 = [TableFX(self._song.song_data.table_cmd2, self._index, i)
                      for i in xrange(STEPS_PER_TABLE)]
+
+    def __eq__(self, other):
+        return self._fx1 == other._fx1 and self._fx2 == other._fx2
 
     @property
     def song(self):

@@ -9,6 +9,14 @@ class Instrument(object):
         self.data = song.song_data.instruments[index]
         self.index = index
 
+    def __eq__(self, other):
+        return (isinstance(other, Instrument) and
+                self.name == other.name and
+                self.type == other.type and
+                self.table == other.table and
+                self.automate == other.automate and
+                self.pan == other.pan)
+
     @property
     def name(self):
         """the instrument's name (5 characters, zero-padded)"""
