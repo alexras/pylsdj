@@ -2,6 +2,7 @@ import os
 import warnings
 import sys
 from struct import pack, unpack
+import tempfile
 
 def printable_decimal_and_hex(num):
     return "{0:d} (0x{0:x})".format(num)
@@ -74,3 +75,14 @@ def name_without_zeroes(name):
         return name
     else:
         return str(name[:first_zero])
+
+class temporary_file:
+    def __enter__(self):
+        (tmp_handle, tmp_abspath) = tempfile.mkstemp()
+        os.close(tmp_handle)
+        self.abspath = tmp_abspath
+        return self.abspath
+
+    def __exit__(self, t, value, traceback):
+        if hasattr(self, 'abspath') and self.abspath is not None:
+            os.unlink(self.abspath)

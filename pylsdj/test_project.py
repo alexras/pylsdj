@@ -1,4 +1,4 @@
-import json, os, sys, math, cProfile, tempfile
+import json, os, sys, math, cProfile
 from nose.tools import assert_equal, assert_less
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -7,6 +7,7 @@ sys.path.append(os.path.join(SCRIPT_DIR, os.path.pardir))
 
 import filepack as filepack
 from project import Project, load_lsdsng, load_srm
+from utils import temporary_file
 
 def test_save_load_lsdsng():
     sample_song_compressed = os.path.join(
@@ -22,19 +23,12 @@ def test_save_load_lsdsng():
 
     tmp_abspath = None
 
-    try:
-        (tmp_handle, tmp_abspath) = tempfile.mkstemp()
-        os.close(tmp_handle)
-
+    with temporary_file() as tmp_abspath:
         proj.save_lsdsng(tmp_abspath)
 
         read_project = load_lsdsng(tmp_abspath)
 
         assert_equal(proj, read_project)
-    finally:
-        if tmp_abspath is not None:
-            os.unlink(tmp_abspath)
-
 
 def test_read_write_project():
     sample_song_compressed = os.path.join(
@@ -94,19 +88,10 @@ def test_save_load_srm():
 
     proj = load_srm(srm_song)
 
-    try:
-        (tmp_proj_handle, tmp_proj_abspath) = tempfile.mkstemp()
-
-        os.close(tmp_proj_handle)
-
+    with temporary_file() as tmp_proj_abspath:
         proj.save_srm(tmp_proj_abspath)
-
         read_proj = load_srm(tmp_proj_abspath)
-
         assert_equal(proj, read_proj)
-    finally:
-        if tmp_proj_abspath is not None:
-            os.unlink(tmp_proj_abspath)
 
 if __name__ == "__main__":
     test_srm_load()
