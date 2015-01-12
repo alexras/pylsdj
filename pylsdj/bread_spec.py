@@ -1,6 +1,5 @@
 import bread as b
 
-
 def padded_hex(pad_count):
     return lambda x: ("0x%%0%dx" % (pad_count)) % (x)
 
@@ -415,8 +414,23 @@ word_sound = [
     ("length", b.byte)
 ]
 
+# A list which provides the names of all the notes store
+# in a phrase's `notes` field
+NOTES = ['---']
+
+for i in xrange(0x3, 0x10):
+    NOTES.extend(
+        map(lambda x: '%s%X' % (x.ljust(2, ' '), i),
+            ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B')))
+
+NOTES_DICT = {}
+
+for i, note in enumerate(NOTES):
+    NOTES_DICT[i] = note
+
 song = [
-    ("phrase_notes", b.array(NUM_PHRASES, b.array(STEPS_PER_PHRASE, b.byte))),
+    ("phrase_notes", b.array(NUM_PHRASES, b.array(
+        STEPS_PER_PHRASE, b.enum(8, NOTES_DICT)))),
     ("bookmarks", b.array(64, b.byte)),
     b.padding(96 * 8),
     ("grooves", b.array(NUM_GROOVES, b.array(STEPS_PER_GROOVE, b.byte))),
