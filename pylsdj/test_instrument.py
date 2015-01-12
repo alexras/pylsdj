@@ -1,17 +1,20 @@
 import os
+import json
+
 from nose.tools import assert_equal
 
 from instrument import Instrument
 from project import load_lsdsng
+from utils import temporary_file
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 
-def test_load_lsdinst():
+def test_load_store_wave_lsdinst():
     proj = load_lsdsng(os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
 
-    proj.song.instruments.import_from_file(
-        0x2a,
-        os.path.join(SCRIPT_DIR, 'test_data', 'KI.lsdinst'))
+    lsdinst_path = os.path.join(SCRIPT_DIR, 'test_data', 'KI.lsdinst')
+
+    proj.song.instruments.import_from_file(0x2a, lsdinst_path)
 
     target_instr = proj.song.instruments[0x2a]
 
@@ -25,6 +28,7 @@ def test_load_lsdinst():
     assert_equal('wave', target_instr.type)
     assert_equal(3, target_instr.volume)
     assert_equal(0, target_instr.repeat)
+    assert_equal('once', target_instr.play_type)
     assert_equal('allpass', synth.filter_type)
     assert_equal('clip', synth.distortion)
     assert_equal(3, synth.filter_resonance)
@@ -38,3 +42,17 @@ def test_load_lsdinst():
 
     assert_equal('P', target_instr.table.fx1[0].command)
     assert_equal('K', target_instr.table.fx1[6].command)
+
+    tmpfile = '/tmp/baz'
+
+    # with temporary_file() as tmpfile:
+    if tmpfile is not None:
+        target_instr.export_to_file(tmpfile)
+
+        with open(tmpfile, 'r') as fp:
+            saved_kit = json.load(fp)
+
+        with open(lsdinst_path, 'r') as fp:
+            original_kit = json.load(fp)
+
+            assert_equal(original_kit, saved_kit)
