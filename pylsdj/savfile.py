@@ -14,8 +14,11 @@ import bitstring
 import exceptions
 
 # By default, SAV file loading doesn't trigger any callback action
+
+
 def _noop_callback(message, step, total_steps, continuing):
     pass
+
 
 class SAVFile(object):
     # Start offset of SAV file contents
@@ -51,7 +54,7 @@ class SAVFile(object):
     # Length in bytes of file number
     FILE_NUMBER_LENGTH = 1
 
-    #Constants
+    # Constants
     EMPTY_BLOCK = 0xff
 
     def __init__(self, filename, callback=_noop_callback):
@@ -141,14 +144,15 @@ class SAVFile(object):
             project_version = self.header_block.file_versions[file_number]
 
             callback("Reading project '%s' v%d" %
-                     (utils.name_without_zeroes(project_name), project_version),
+                     (utils.name_without_zeroes(
+                         project_name), project_version),
                      current_step, total_steps, True)
 
             project = Project(
-                name = self.header_block.filenames[file_number],
-                version = self.header_block.file_versions[file_number],
-                data = raw_data,
-                size_blks = project_size_blks)
+                name=self.header_block.filenames[file_number],
+                version=self.header_block.file_versions[file_number],
+                data=raw_data,
+                size_blks=project_size_blks)
 
             self.projects[file_number] = project
 
@@ -184,7 +188,8 @@ class SAVFile(object):
         return [(i, self.projects[i]) for i in sorted(self.projects.keys())]
 
     def _save(self, fp, callback):
-        # Marshal 32 possible projects + write preamble + write data + "all done"
+        # Marshal 32 possible projects + write preamble + write data + "all
+        # done"
         total_steps = 35
         current_step = 0
 

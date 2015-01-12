@@ -2,7 +2,9 @@ from instrument import Instrument
 from bread_spec import INSTRUMENT_TYPE_CODE
 from instrument_mixins import VibratoMixin
 
+
 class KitInstrument(Instrument, VibratoMixin):
+
     def __init__(self, song, index):
         super(KitInstrument, self).__init__(song, index)
 

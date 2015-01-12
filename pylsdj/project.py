@@ -1,4 +1,5 @@
-import sys, math
+import sys
+import math
 import bread
 import bread_spec as spec
 from song import Song
@@ -7,6 +8,7 @@ import utils
 import filepack
 import blockutils
 from blockutils import BlockReader, BlockWriter, BlockFactory
+
 
 def load_lsdsng(filename):
     """Load a Project from a ``.lsdsng`` file.
@@ -38,7 +40,7 @@ def load_lsdsng(filename):
 
         remapped_blocks = filepack.renumber_block_keys(factory.blocks)
 
-        reader =  BlockReader()
+        reader = BlockReader()
         compressed_data = reader.read(remapped_blocks)
 
         # Now, decompress the raw data and use it and the preamble to construct
@@ -51,6 +53,7 @@ def load_lsdsng(filename):
             float(len(compressed_data)) / blockutils.BLOCK_SIZE))
 
         return Project(name, version, size_blks, raw_data)
+
 
 def load_srm(filename):
     """Load a Project from an ``.srm`` file.
@@ -81,7 +84,9 @@ def load_srm(filename):
 
     return Project(name, version, size_in_blocks, raw_data)
 
+
 class Project(object):
+
     def __init__(self, name, version, size_blks, data):
         self.name = name
         """the project's name"""

@@ -9,8 +9,10 @@ from utils import temporary_file
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 
+
 def test_load_store_wave_lsdinst():
-    proj = load_lsdsng(os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
+    proj = load_lsdsng(
+        os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
 
     lsdinst_path = os.path.join(SCRIPT_DIR, 'test_data', 'KI.lsdinst')
 

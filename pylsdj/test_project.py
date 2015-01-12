@@ -1,4 +1,8 @@
-import json, os, sys, math, cProfile
+import json
+import os
+import sys
+import math
+import cProfile
 from nose.tools import assert_equal, assert_less
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -8,6 +12,7 @@ sys.path.append(os.path.join(SCRIPT_DIR, os.path.pardir))
 import filepack as filepack
 from project import Project, load_lsdsng, load_srm
 from utils import temporary_file
+
 
 def test_save_load_lsdsng():
     sample_song_compressed = os.path.join(
@@ -29,6 +34,7 @@ def test_save_load_lsdsng():
         read_project = load_lsdsng(tmp_abspath)
 
         assert_equal(proj, read_project)
+
 
 def test_read_write_project():
     sample_song_compressed = os.path.join(
@@ -77,11 +83,13 @@ def test_block_remap_required():
     assert_equal(3, proj.version)
     assert_equal(4, proj.size_blks)
 
+
 def test_srm_load():
     srm_song = os.path.join(SCRIPT_DIR, "test_data", "sample.srm")
 
     proj = load_srm(srm_song)
     assert_equal("CLICK", proj.song.instruments[0].name)
+
 
 def test_save_load_srm():
     srm_song = os.path.join(SCRIPT_DIR, "test_data", "sample.srm")

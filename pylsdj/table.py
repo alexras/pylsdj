@@ -2,7 +2,9 @@ import json
 from utils import add_song_data_property
 from bread_spec import STEPS_PER_TABLE
 
+
 class TableFX(object):
+
     def __init__(self, params, table_index, fx_index):
         self._params = params
         self._table_index = table_index
@@ -28,8 +30,10 @@ class TableFX(object):
 
 
 class Table(object):
+
     """Each table is a sequence of transposes, commands, and amplitude
     changes that can be applied to any channel."""
+
     def __init__(self, song, index):
         self._song = song
         self._index = index

@@ -1,6 +1,8 @@
 from vibrato import Vibrato
 
+
 class EnvelopeMixin(object):
+
     @property
     def envelope(self):
         """the noise instrument's volume envelope (8-bit integer)"""
@@ -14,7 +16,9 @@ class EnvelopeMixin(object):
     def import_lsdinst(obj, struct_data):
         obj.envelope = struct_data['data']['envelope']
 
+
 class VibratoMixin(object):
+
     @property
     def vibrato(self):
         """instrument's vibrato settings"""
@@ -26,6 +30,7 @@ class VibratoMixin(object):
 
 
 class SoundLengthMixin(object):
+
     @property
     def sound_length(self):
         """the instrument sound's length, a 6-bit integer or ``unlimited``
@@ -50,7 +55,9 @@ class SoundLengthMixin(object):
         else:
             obj.sound_length = 'unlimited'
 
+
 class SweepMixin(object):
+
     @property
     def sweep(self):
         """modulates the sound's frequency; only works on pulse 1

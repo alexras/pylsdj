@@ -1,6 +1,8 @@
 import json
 
+
 class SynthSoundParams(object):
+
     def __init__(self, params):
         self._params = params
 
@@ -52,6 +54,7 @@ class SynthSoundParams(object):
 
 
 class Synth(object):
+
     def __init__(self, song, index):
         self._song = song
         self._index = index

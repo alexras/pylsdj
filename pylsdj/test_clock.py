@@ -5,8 +5,10 @@ from project import load_lsdsng
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 
+
 def test_read_clocks():
-    proj = load_lsdsng(os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
+    proj = load_lsdsng(
+        os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
 
     project_clock = proj.song.clock
     total_clock = proj.song.global_clock
@@ -22,8 +24,10 @@ def test_read_clocks():
     assert_equal(1, total_clock.hours)
     assert_equal(11, total_clock.minutes)
 
+
 def test_set_local_clock():
-    proj = load_lsdsng(os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
+    proj = load_lsdsng(
+        os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
 
     project_clock = proj.song.clock
 
@@ -33,8 +37,10 @@ def test_set_local_clock():
     assert_equal(2, proj.song.clock.hours)
     assert_equal(22, proj.song.clock.minutes)
 
+
 def test_set_global_clock():
-    proj = load_lsdsng(os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
+    proj = load_lsdsng(
+        os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
 
     total_clock = proj.song.global_clock
 

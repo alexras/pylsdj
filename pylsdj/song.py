@@ -25,7 +25,9 @@ import StringIO
 # Number of channels
 NUM_CHANNELS = 4
 
+
 class AllocTable(object):
+
     def __init__(self, song, alloc_table, object_class):
         self.alloc_table = alloc_table
 
@@ -63,6 +65,7 @@ class AllocTable(object):
             if not occupied:
                 return i
         return None
+
 
 class Instruments(object):
     specs = {
@@ -107,7 +110,7 @@ class Instruments(object):
         # storing, we've got to make a new one of the appropriate type into
         # which to demarshal
         if (current_access_object is None or
-            current_access_object.type != instrument_type):
+                current_access_object.type != instrument_type):
             self.access_objects[index] = (
                 self.instrumentClasses[instrument_type](self.song, index))
             self.access_objects[index].data = self._new_default_instrument(
@@ -171,7 +174,9 @@ class Instruments(object):
 
         instrument.import_lsdinst(lsdinst_struct)
 
+
 class Grooves(object):
+
     def __init__(self, song):
         self.song = song
 
@@ -179,6 +184,7 @@ class Grooves(object):
         assert_index_sane(index, len(self.song.song_data.grooves))
 
         return self.song.song_data.grooves[index]
+
 
 class Sequence(object):
     PU1 = "pu1"
@@ -246,7 +252,9 @@ class Sequence(object):
         string = output_str.getvalue()
         return string
 
+
 class Synths(object):
+
     def __init__(self, song):
         self.song = song
         self.access_objects = []
@@ -264,8 +272,10 @@ class Synths(object):
 
 
 class Song(object):
+
     """A song consists of a sequence of chains, one per channel.
     """
+
     def __init__(self, song_data):
         # Check checksums
         assert song_data.mem_init_flag_1 == 'rb'
@@ -285,21 +295,21 @@ class Song(object):
 
         # Stitch together allocated tables
         self._tables = AllocTable(
-            song = self,
-            alloc_table = self.song_data.table_alloc_table,
-            object_class = Table)
+            song=self,
+            alloc_table=self.song_data.table_alloc_table,
+            object_class=Table)
 
         # Stitch together allocated phrases
         self._phrases = AllocTable(
-            song = self,
-            alloc_table = self.song_data.phrase_alloc_table,
-            object_class = Phrase)
+            song=self,
+            alloc_table=self.song_data.phrase_alloc_table,
+            object_class=Phrase)
 
         # Stitch together allocated chains
         self._chains = AllocTable(
-            song = self,
-            alloc_table = self.song_data.chain_alloc_table,
-            object_class = Chain)
+            song=self,
+            alloc_table=self.song_data.chain_alloc_table,
+            object_class=Chain)
 
         self._sequence = Sequence(self)
 

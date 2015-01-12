@@ -6,7 +6,9 @@ import bread_spec
 
 from synth import Synth
 
+
 class WaveInstrument(Instrument, VibratoMixin):
+
     def __init__(self, song, index):
         super(WaveInstrument, self).__init__(song, index)
 
@@ -71,8 +73,6 @@ class WaveInstrument(Instrument, VibratoMixin):
         for instrument in self.song.instruments.as_list():
             if instrument is not None and instrument.type == 'wave':
                 available_synths.discard(instrument.synth.index)
-
-
 
         if len(available_synths) == 0:
             return None

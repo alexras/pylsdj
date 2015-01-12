@@ -10,12 +10,14 @@ object that encapsulates a block's data, and
 # Maximum size of a block - 512 bytes
 BLOCK_SIZE = 0x200
 
+
 class Block(object):
+
     def __init__(self, block_id, data):
         self.id = block_id
         self.data = data
 
-    def __repr__(self): # pragma: no cover
+    def __repr__(self):  # pragma: no cover
         repr_str = "{"
         repr_str += "BLOCK %d (%d bytes)\n" % (self.id, len(self.data))
 
@@ -31,9 +33,12 @@ class Block(object):
         repr_str += "}"
         return repr_str
 
+
 class BlockFactory(object):
+
     """Each block's ID should correspond to its position in an array of blocks.
     """
+
     def __init__(self):
         self.max_id = 0
         self.blocks = {}
@@ -45,14 +50,18 @@ class BlockFactory(object):
 
         return block
 
+
 class BlockWriter(object):
+
     def write(self, compressed_data, factory):
         """Splits a compressed byte stream into blocks.
         """
         return filepack.split(compressed_data, BLOCK_SIZE,
                               factory)
 
+
 class BlockReader(object):
+
     def read(self, block_dict):
         """Parses a dictionary of blocks into a compressed byte stream.
         """

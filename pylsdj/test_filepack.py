@@ -1,9 +1,12 @@
-import os, sys, json
+import os
+import sys
+import json
 from nose.tools import raises, assert_equal, assert_list_equal
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 sys.path.append(os.path.join(SCRIPT_DIR, os.path.pardir))
+
 
 def assert_bytearray_equal(x, y):
     assert_list_equal(map(hex, x), map(hex, y))
@@ -13,6 +16,7 @@ import blockutils as bl
 import bread_spec as bread_spec
 import bread as b
 
+
 def test_basic_compress_decompress():
     data = [i % 10 for i in xrange(5000)]
 
@@ -21,6 +25,7 @@ def test_basic_compress_decompress():
     decompressed = filepack.decompress(compressed)
 
     assert_list_equal(data, decompressed)
+
 
 def test_rle_compress():
     data = [0xde for i in xrange(350)]
@@ -41,12 +46,14 @@ def test_rle_compress():
 
     assert_list_equal(decompressed, data)
 
+
 def test_short_rle_compress():
     data = [0xde, 0xde, 42, 17, 12]
 
     compressed = filepack.compress(data)
 
     assert_list_equal(compressed, data)
+
 
 def test_rle_special_byte():
     data = [filepack.RLE_BYTE, filepack.RLE_BYTE,
@@ -73,6 +80,7 @@ def test_rle_special_byte():
     decompressed = filepack.decompress(compressed)
 
     assert_list_equal(decompressed, data)
+
 
 def test_default_instr_compress():
     data = []
@@ -101,6 +109,7 @@ def test_default_instr_compress():
 
     assert_bytearray_equal(data, bytearray(decompressed))
 
+
 def test_instrument_sizes():
     instr_bytes = list(filepack.DEFAULT_INSTRUMENT)
 
@@ -125,6 +134,7 @@ def test_instrument_sizes():
     parsed = b.parse(instr_bytes, bread_spec.instrument)
     assert_equal(len(parsed), 16 * 8)
 
+
 def test_default_wave_compress():
     data = []
 
@@ -143,6 +153,7 @@ def test_default_wave_compress():
     assert_list_equal(data, decompressed)
     assert_list_equal(compressed, reference)
 
+
 def test_large_rle_compress():
     data = []
 
@@ -159,6 +170,7 @@ def test_large_rle_compress():
 
     assert_list_equal(data, decompressed)
 
+
 @raises(AssertionError)
 def test_bad_rle_split():
     data = [filepack.RLE_BYTE]
@@ -166,6 +178,7 @@ def test_bad_rle_split():
     factory = bl.BlockFactory()
 
     filepack.split(data, bl.BLOCK_SIZE, factory)
+
 
 @raises(AssertionError)
 def test_bad_special_byte_split():
@@ -175,6 +188,7 @@ def test_bad_special_byte_split():
 
     filepack.split(data, bl.BLOCK_SIZE, factory)
 
+
 @raises(AssertionError)
 def test_block_jump_during_split_asserts():
     data = [filepack.SPECIAL_BYTE, 47]
@@ -182,6 +196,7 @@ def test_block_jump_during_split_asserts():
     factory = bl.BlockFactory()
 
     filepack.split(data, bl.BLOCK_SIZE, factory)
+
 
 def test_special_byte_on_block_boundary():
     data = [42, 17, filepack.SPECIAL_BYTE, filepack.SPECIAL_BYTE,
@@ -201,6 +216,7 @@ def test_special_byte_on_block_boundary():
     assert_list_equal(factory.blocks[1].data, block_1_expected)
     assert_list_equal(factory.blocks[2].data, block_2_expected)
 
+
 def test_rle_byte_on_block_boundary():
     data = [42, 17, filepack.RLE_BYTE, filepack.RLE_BYTE,
             100, 36]
@@ -219,6 +235,7 @@ def test_rle_byte_on_block_boundary():
     assert_list_equal(factory.blocks[1].data, block_1_expected)
     assert_list_equal(factory.blocks[2].data, block_2_expected)
 
+
 def test_full_rle_on_block_boundary():
     data = [42, filepack.RLE_BYTE, 55, 4, 22, 3]
 
@@ -234,6 +251,7 @@ def test_full_rle_on_block_boundary():
     assert_list_equal(factory.blocks[0].data, block_0_expected)
     assert_list_equal(factory.blocks[1].data, block_1_expected)
     assert_list_equal(factory.blocks[2].data, block_2_expected)
+
 
 def test_default_on_block_boundary():
     data = [42, filepack.SPECIAL_BYTE, filepack.DEFAULT_INSTR_BYTE, 3, 2, 5]
@@ -252,6 +270,7 @@ def test_default_on_block_boundary():
     assert_list_equal(factory.blocks[1].data, block_1_expected)
     assert_list_equal(factory.blocks[2].data, block_2_expected)
 
+
 def test_merge_with_rle_byte():
     factory = bl.BlockFactory()
 
@@ -266,6 +285,7 @@ def test_merge_with_rle_byte():
 
     assert_list_equal(data, expected_data)
 
+
 def test_merge_with_full_rle():
     factory = bl.BlockFactory()
     block1 = factory.new_block()
@@ -277,6 +297,7 @@ def test_merge_with_full_rle():
     data = filepack.merge(factory.blocks)
 
     assert_list_equal(data, [filepack.RLE_BYTE, 42, 17, 1, 1, 4, 4, 4, 42])
+
 
 def test_merge_with_special_byte():
     factory = bl.BlockFactory()
@@ -293,6 +314,7 @@ def test_merge_with_special_byte():
 
     assert_list_equal(data, expected_data)
 
+
 def test_merge_with_special_command():
     factory = bl.BlockFactory()
 
@@ -308,11 +330,13 @@ def test_merge_with_special_command():
 
     assert_list_equal(data, expected_data)
 
+
 @raises(AssertionError)
 def test_decompress_bogus_special_byte_asserts():
     data = [filepack.SPECIAL_BYTE, filepack.EOF_BYTE]
 
     filepack.decompress(data)
+
 
 def test_weird_rle_compress():
     data = [0x1b, 0xc0, 0x00, 0x0f, 0x1d, 0xc0, 0x00, 0x0f, 0x1e, 0xc0,
@@ -432,6 +456,7 @@ def test_weird_rle_compress():
 
     recompressed = filepack.compress(decompressed)
     assert_list_equal(data, recompressed)
+
 
 def test_sample_song():
     sample_song_compressed = os.path.join(

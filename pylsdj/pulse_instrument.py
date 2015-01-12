@@ -5,9 +5,11 @@ from instrument_mixins import EnvelopeMixin, SoundLengthMixin, VibratoMixin, \
 
 MIXINS = [VibratoMixin, SoundLengthMixin, EnvelopeMixin, SweepMixin]
 
+
 class PulseInstrument(Instrument,
                       VibratoMixin, SoundLengthMixin, EnvelopeMixin,
                       SweepMixin):
+
     def __init__(self, song, index):
         super(PulseInstrument, self).__init__(song, index)
 

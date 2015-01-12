@@ -1,9 +1,12 @@
 from utils import ObjectLookupDict
 
+
 class Chain(object):
+
     """A chain is a sequence of phrases for a single channel. Each phrase can be
     transposed by a number of semitones.
     """
+
     def __init__(self, song, index):
         self.song = song
         self.index = index

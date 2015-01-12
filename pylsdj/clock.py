@@ -1,4 +1,5 @@
 class Clock(object):
+
     def __init__(self, clock_data):
         self._clock_data = clock_data
 
@@ -23,7 +24,9 @@ class Clock(object):
     def __repr__(self):
         return "%d hours, %d minutes" % (self.hours, self.minutes)
 
+
 class TotalClock(object):
+
     def __init__(self, clock_data):
         """Constructor.
 

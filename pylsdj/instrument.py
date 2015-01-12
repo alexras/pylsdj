@@ -11,6 +11,7 @@ from exceptions import ImportException
 
 
 class Instrument(object):
+
     def __init__(self, song, index):
         self.song = song
         self.data = song.song_data.instruments[index]
@@ -91,7 +92,7 @@ class Instrument(object):
         data_json = json.loads(self.data.as_json())
 
         for key, value in data_json.items():
-            if key[0] != '_' and key not in ('synth','table'):
+            if key[0] != '_' and key not in ('synth', 'table'):
                 export_struct['data'][key] = value
 
         if self.table is not None:

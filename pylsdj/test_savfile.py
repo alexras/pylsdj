@@ -1,4 +1,5 @@
-import os,sys
+import os
+import sys
 from nose.tools import assert_equal, with_setup
 
 sys.path.append(
@@ -10,13 +11,16 @@ from project import Project
 SAV_IN = os.path.join(os.path.dirname(__file__), "test_data", "lsdj.sav")
 SAV_OUT = os.path.join(os.path.dirname(__file__), "lsdj.sav.out")
 
+
 def setup():
-   if os.path.exists(SAV_OUT):
-       os.unlink(SAV_OUT)
+    if os.path.exists(SAV_OUT):
+        os.unlink(SAV_OUT)
+
 
 def teardown():
-   if os.path.exists(SAV_OUT):
-       os.unlink(SAV_OUT)
+    if os.path.exists(SAV_OUT):
+        os.unlink(SAV_OUT)
+
 
 @with_setup(setup, teardown)
 def test_project_save_load():

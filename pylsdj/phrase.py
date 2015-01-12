@@ -1,8 +1,11 @@
 from utils import add_song_data_property, assert_index_sane, ObjectLookupDict
 
+
 class Phrase(object):
+
     """A phrase is a sequence of notes for a single channel.
     """
+
     def __init__(self, song, index):
         self._song = song
         self._index = index
@@ -31,4 +34,4 @@ for property_name, doc in [
         ("fx_val", "a list of the phrase's effect parameters, "
          "one byte per effect")]:
     add_song_data_property(Phrase, property_name, ("phrase_" + property_name,),
-                           use_index = True, doc=doc)
+                           use_index=True, doc=doc)

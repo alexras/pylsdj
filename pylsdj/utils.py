@@ -4,8 +4,10 @@ import sys
 from struct import pack, unpack
 import tempfile
 
+
 def printable_decimal_and_hex(num):
     return "{0:d} (0x{0:x})".format(num)
+
 
 def add_song_data_property(clazz, property_name, song_data_field_path,
                            use_index=False, doc=None):
@@ -41,13 +43,16 @@ def add_song_data_property(clazz, property_name, song_data_field_path,
     setattr(clazz, property_name, property(
         fset=set_field, fget=get_field, doc=doc))
 
+
 def assert_index_sane(index, upper_bound_exclusive):
     assert type(index) == int, "Indices should be integers; '%s' is not" % (
         index)
     assert 0 <= index < upper_bound_exclusive, (
         "Index %d out of range [%d, %d)" % (index, 0, upper_bound_exclusive))
 
+
 class ObjectLookupDict(object):
+
     def __init__(self, id_list, object_list):
         self.id_list = id_list
         self.object_list = object_list
@@ -61,6 +66,7 @@ class ObjectLookupDict(object):
         assert_index_sane(index, len(self.id_list))
 
         self.id_list[index] = value.index
+
 
 def name_without_zeroes(name):
     """
@@ -76,7 +82,9 @@ def name_without_zeroes(name):
     else:
         return str(name[:first_zero])
 
+
 class temporary_file:
+
     def __enter__(self):
         (tmp_handle, tmp_abspath) = tempfile.mkstemp()
         os.close(tmp_handle)

@@ -42,6 +42,7 @@ STATE_DEFAULT_INSTR = 4
 STATE_DEFAULT_WAVE = 5
 STATE_DONE = 6
 
+
 def split(compressed_data, segment_size, block_factory):
     """Splits compressed data into blocks.
 
@@ -94,7 +95,7 @@ def split(compressed_data, segment_size, block_factory):
         # Need two bytes for the jump or EOF
         if index - current_segment_start + jump_size > segment_size - 2:
             segments.append(compressed_data[
-                    current_segment_start:index])
+                current_segment_start:index])
 
             current_segment_start = index
         else:
@@ -103,8 +104,7 @@ def split(compressed_data, segment_size, block_factory):
     # Append the last segment, if any
     if current_segment_start != index:
         segments.append(compressed_data[
-                current_segment_start:current_segment_start + index])
-
+            current_segment_start:current_segment_start + index])
 
     # Make sure that no data was lost while segmenting
     total_segment_length = sum(map(len, segments))
@@ -136,6 +136,7 @@ def split(compressed_data, segment_size, block_factory):
         block.data = segment
 
     return block_ids
+
 
 def renumber_block_keys(blocks):
     """Renumber a block map's indices so that tehy match the blocks' block
@@ -199,6 +200,7 @@ def renumber_block_keys(blocks):
 
     return new_block_map
 
+
 def merge(blocks):
     """Merge the given blocks into a contiguous block of compressed data.
 
@@ -256,9 +258,11 @@ def merge(blocks):
 
     return compressed_data
 
+
 def add_eof(segment):
     """Add an EOF statement to a block."""
     segment.extend([SPECIAL_BYTE, EOF_BYTE])
+
 
 def add_block_switch(segment, block_id):
     """Add a block switch statement to a block.
@@ -267,6 +271,7 @@ def add_block_switch(segment, block_id):
     :param block_id: the block ID to which the switch statement should switch
     """
     segment.extend([SPECIAL_BYTE, block_id])
+
 
 def pad(segment, size):
     """Add zeroes to a segment until it reaches a certain size.
@@ -278,6 +283,7 @@ def pad(segment, size):
         segment.append(0)
 
     assert len(segment) == size
+
 
 def decompress(compressed_data):
     """Decompress data that has been compressed by the filepack algorithm.
@@ -330,6 +336,7 @@ def decompress(compressed_data):
             raw_data.append(current)
 
     return raw_data
+
 
 def compress(raw_data):
     """Compress raw bytes with the filepack algorithm.

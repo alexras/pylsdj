@@ -3,7 +3,9 @@ from instrument_mixins import SoundLengthMixin, EnvelopeMixin, SweepMixin
 
 MIXINS = [SoundLengthMixin, EnvelopeMixin, SweepMixin]
 
+
 class NoiseInstrument(Instrument, SoundLengthMixin, EnvelopeMixin, SweepMixin):
+
     def __init__(self, song, index):
         super(NoiseInstrument, self).__init__(song, index)
 

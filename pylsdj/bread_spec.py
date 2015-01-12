@@ -1,5 +1,6 @@
 import bread as b
 
+
 def padded_hex(pad_count):
     return lambda x: ("0x%%0%dx" % (pad_count)) % (x)
 
@@ -12,7 +13,7 @@ compressed_sav_file = [
     # Each file has a monotonically increasing version number
     ("file_versions", b.array(32, b.byte)),
     b.padding(30 * 8),
-    ("sram_init_check", b.string(2)), # set to 'jk' on init
+    ("sram_init_check", b.string(2)),  # set to 'jk' on init
     # The file that is currently active
     ("active_file", b.byte),
     # Table mapping blocks to files.
@@ -21,7 +22,7 @@ compressed_sav_file = [
 
 # Should be 0x4000 bytes long
 sample_kit = [
-    ("magic_number", b.string(2)), # should be 0x60, 0x40
+    ("magic_number", b.string(2)),  # should be 0x60, 0x40
     # The address of the first byte after each sample, or 0 if the sample is
     # unused
     ("sample_end_addresses", b.array(15, b.string(2))),
@@ -109,7 +110,7 @@ pulse_instrument = [
     ("automate", b.boolean),
     ("automate_2", b.boolean),
     ("vibrato", [
-        ("type",b.enum(2, {
+        ("type", b.enum(2, {
             0: "hf",
             1: "sawtooth",
             2: "sine",
@@ -158,13 +159,13 @@ wave_instrument = [
     ("automate", b.boolean),
     ("automate_2", b.boolean),
     ("vibrato", [
-        ("type",b.enum(2, {
+        ("type", b.enum(2, {
             0: "hf",
             1: "sawtooth",
             2: "sine",
             3: "square"
         })),
-        ("direction", b.enum(1,{
+        ("direction", b.enum(1, {
             0: "down",
             1: "up"
         }))
@@ -205,13 +206,13 @@ kit_instrument = [
     ("automate", b.boolean),
     ("automate_2", b.boolean),
     ("vibrato", [
-        ("type",b.enum(2, {
+        ("type", b.enum(2, {
             0: "hf",
             1: "sawtooth",
             2: "sine",
             3: "square"
         })),
-        ("direction", b.enum(1,{
+        ("direction", b.enum(1, {
             0: "down",
             1: "up"
         }))
@@ -280,12 +281,12 @@ INSTRUMENT_TYPE_CODE = {
 instrument = [
     ("instrument_type", b.enum(
         8, dict([(v, k) for (k, v) in INSTRUMENT_TYPE_CODE.items()]),
-        default = "invalid")),
+        default="invalid")),
     (b.CONDITIONAL, "instrument_type", {
-        "pulse" : pulse_instrument,
-        "wave" : wave_instrument,
-        "kit" : kit_instrument,
-        "noise" : noise_instrument,
+        "pulse": pulse_instrument,
+        "wave": wave_instrument,
+        "kit": kit_instrument,
+        "noise": noise_instrument,
         "invalid": [b.padding(15 * 8)]
     })
 ]
@@ -436,7 +437,8 @@ song = [
     ("chain_transposes", b.array(
         NUM_CHAINS, b.array(PHRASES_PER_CHAIN, b.byte))),
     ("instruments", b.array(NUM_INSTRUMENTS, instrument)),
-    ("table_transposes", b.array(NUM_TABLES, b.array(STEPS_PER_TABLE, b.byte))),
+    ("table_transposes", b.array(
+        NUM_TABLES, b.array(STEPS_PER_TABLE, b.byte))),
     ("table_cmd1", table_command),
     ("table_cmd2", table_command),
     # Set to 'rb' on init
