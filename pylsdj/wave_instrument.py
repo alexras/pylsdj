@@ -100,6 +100,6 @@ class WaveInstrument(Instrument, VibratoMixin):
     def export_struct(self):
         export_struct = super(WaveInstrument, self).export_struct()
 
-        export_struct['synth'] = Synth(self.song, self.synth).export()
+        export_struct['synth'] = Synth(self.song, self.synth.index).export()
 
         return export_struct
