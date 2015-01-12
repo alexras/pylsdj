@@ -1,5 +1,14 @@
 from utils import ObjectLookupDict
 
+# Need to define a custom lookup dict so that index=255 is treated as unset and
+# doesn't throw an exception
+class InstrumentLookupDict(ObjectLookupDict):
+    def __getitem__(self, index):
+        if self.id_list[index] == 255:
+            return None
+
+        return super(InstrumentLookupDict, self).__getitem__(index)
+
 class Phrase(object):
 
     """A phrase is a sequence of notes for a single channel.
@@ -8,7 +17,7 @@ class Phrase(object):
     def __init__(self, song, index):
         self._song = song
         self._index = index
-        self._instruments = ObjectLookupDict(
+        self._instruments = InstrumentLookupDict(
             self._song.song_data.phrase_instruments[index],
             self._song.instruments)
 
