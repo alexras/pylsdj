@@ -60,4 +60,4 @@ class PulseInstrument(Instrument,
         self.wave = struct_data['data']['wave']
 
         for mixin in MIXINS:
-            mixin.import_from_struct_data(self, struct_data)
+            mixin.import_lsdinst(self, struct_data)

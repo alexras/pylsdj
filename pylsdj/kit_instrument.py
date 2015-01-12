@@ -158,4 +158,4 @@ class KitInstrument(Instrument, VibratoMixin):
         self.pitch = lsdinst_struct['data']['pitch']
         self.dist_type = lsdinst_struct['data']['dist_type']
 
-        VibratoMixin.import_lsdinst(lsdinst_struct)
+        VibratoMixin.import_lsdinst(self, lsdinst_struct)
