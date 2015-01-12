@@ -1,7 +1,4 @@
 import filepack
-import instrument
-import wave
-import consts
 
 """LSDJ stores its data in a block-oriented format. This file contains a Block
 object that encapsulates a block's data, and

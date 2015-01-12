@@ -2,7 +2,6 @@ import bread_spec
 import bread
 import os
 import sys
-from struct import unpack
 import utils
 from StringIO import StringIO
 from project import Project
@@ -184,7 +183,8 @@ class SAVFile(object):
 
     @property
     def project_list(self):
-        """The list of :py:class:`pylsdj.Project` s that the .sav file contains"""
+        """The list of :py:class:`pylsdj.Project` s that the
+        .sav file contains"""
         return [(i, self.projects[i]) for i in sorted(self.projects.keys())]
 
     def _save(self, fp, callback):
@@ -251,7 +251,7 @@ class SAVFile(object):
 
         # Ignore the header block when serializing the block allocation table
         for i, b in enumerate(block_table[1:]):
-            if b == None:
+            if b is None:
                 file_no = self.EMPTY_BLOCK
             else:
                 file_no = b

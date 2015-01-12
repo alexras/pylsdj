@@ -205,7 +205,10 @@ class Sequence(object):
 
         chain_objs = {}
 
-        for channel in [Sequence.PU1, Sequence.PU2, Sequence.WAV, Sequence.NOI]:
+        for channel in [Sequence.PU1,
+                        Sequence.PU2,
+                        Sequence.WAV,
+                        Sequence.NOI]:
             chain_number = getattr(raw_chain, channel)
 
             if chain_number != Sequence.NO_CHAIN:

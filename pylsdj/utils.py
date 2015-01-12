@@ -1,7 +1,4 @@
 import os
-import warnings
-import sys
-from struct import pack, unpack
 import tempfile
 
 

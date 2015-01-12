@@ -1,4 +1,3 @@
-from instrument import Instrument
 from utils import add_song_data_property
 
 # Max. length of a word name

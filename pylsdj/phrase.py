@@ -1,4 +1,4 @@
-from utils import add_song_data_property, assert_index_sane, ObjectLookupDict
+from utils import add_song_data_property, ObjectLookupDict
 
 
 class Phrase(object):

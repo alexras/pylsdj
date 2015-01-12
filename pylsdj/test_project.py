@@ -2,7 +2,6 @@ import json
 import os
 import sys
 import math
-import cProfile
 from nose.tools import assert_equal, assert_less
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -53,9 +52,6 @@ def test_read_write_project():
 
     proj = Project(
         song_name, song_version, bogus_size_blks, song_data)
-    empty_instruments = [
-        i for i in xrange(len(proj.song.instruments.alloc_table))
-        if proj.song.instruments.alloc_table[i] == 0]
 
     assert_equal(proj.name, song_name)
     assert_equal(proj.version, song_version)

@@ -1,10 +1,8 @@
-import sys
 import math
 import bread
 import bread_spec as spec
 from song import Song
 import StringIO
-import utils
 import filepack
 import blockutils
 from blockutils import BlockReader, BlockWriter, BlockFactory

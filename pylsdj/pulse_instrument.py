@@ -1,5 +1,4 @@
 from instrument import Instrument
-from bread_spec import INSTRUMENT_TYPE_CODE
 from instrument_mixins import EnvelopeMixin, SoundLengthMixin, VibratoMixin, \
     SweepMixin
 

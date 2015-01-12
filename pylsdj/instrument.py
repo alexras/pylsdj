@@ -1,13 +1,5 @@
 from utils import assert_index_sane
 import json
-import abc
-
-import bread
-
-from filepack import DEFAULT_INSTRUMENT
-from synth import Synth
-
-from exceptions import ImportException
 
 
 class Instrument(object):

@@ -156,8 +156,6 @@ class Synth(object):
         return export_struct
 
     def import_lsdinst(self, synth_data):
-        params_native = self._params.as_native()
-
         import_keys = ['start', 'end', 'waveform', 'filter_type',
                        'filter_resonance', 'distortion', 'phase_type']
 

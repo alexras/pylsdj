@@ -3,7 +3,6 @@ import json
 
 from nose.tools import assert_equal
 
-from instrument import Instrument
 from project import load_lsdsng
 from utils import temporary_file
 
@@ -45,10 +44,7 @@ def test_load_store_wave_lsdinst():
     assert_equal('P', target_instr.table.fx1[0].command)
     assert_equal('K', target_instr.table.fx1[6].command)
 
-    tmpfile = '/tmp/baz'
-
-    # with temporary_file() as tmpfile:
-    if tmpfile is not None:
+    with temporary_file() as tmpfile:
         target_instr.export_to_file(tmpfile)
 
         with open(tmpfile, 'r') as fp:

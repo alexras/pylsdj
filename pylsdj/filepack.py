@@ -1,5 +1,3 @@
-import bread
-import bread_spec
 import itertools
 
 # Byte used to denote run-length encoding
@@ -348,7 +346,6 @@ def compress(raw_data):
     raw_data = bytearray(raw_data)
     compressed_data = []
 
-    data_index = 0
     data_size = len(raw_data)
 
     index = 0

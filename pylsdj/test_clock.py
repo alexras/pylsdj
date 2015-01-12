@@ -42,8 +42,6 @@ def test_set_global_clock():
     proj = load_lsdsng(
         os.path.join(SCRIPT_DIR, 'test_data', 'UNTOLDST.lsdsng'))
 
-    total_clock = proj.song.global_clock
-
     proj.song.global_clock.days = 5
     proj.song.global_clock.hours = 14
     proj.song.global_clock.minutes = 20
