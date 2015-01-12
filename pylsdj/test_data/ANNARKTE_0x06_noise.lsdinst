@@ -1,0 +1,209 @@
+{
+  "table": [
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "K", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }
+  ], 
+  "data": {
+    "instrument_type": "noise", 
+    "sound_length": 0, 
+    "table_on": true, 
+    "envelope": 168, 
+    "sweep": 206, 
+    "has_sound_length": false, 
+    "automate": false, 
+    "automate_2": false, 
+    "s_cmd": "free", 
+    "pan": "LR"
+  }, 
+  "name": "\u0000\u0000\u0000\u0000\u0000"
+}

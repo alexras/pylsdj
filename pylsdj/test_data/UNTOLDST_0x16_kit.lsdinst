@@ -1,0 +1,28 @@
+{
+  "data": {
+    "instrument_type": "kit", 
+    "loop_1": false, 
+    "kit_1": 2, 
+    "kit_2": 1, 
+    "keep_attack_1": false, 
+    "length_1": 0, 
+    "loop_2": false, 
+    "table_on": false, 
+    "dist_type": "wrap", 
+    "offset_1": 0, 
+    "volume": 168, 
+    "length_2": 0, 
+    "offset_2": 0, 
+    "automate": false, 
+    "automate_2": false, 
+    "keep_attack_2": false, 
+    "pitch": 0, 
+    "vibrato": {
+      "direction": "down", 
+      "type": "hf"
+    }, 
+    "half_speed": false, 
+    "pan": "LR"
+  }, 
+  "name": "\u0000\u0000\u0000\u0000\u0000"
+}

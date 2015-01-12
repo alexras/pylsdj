@@ -1,0 +1,215 @@
+{
+  "table": [
+    {
+      "volume": 241, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 161, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 97, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 17, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 1, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }, 
+    {
+      "volume": 0, 
+      "transpose": 0, 
+      "cmd1": [
+        "-", 
+        0
+      ], 
+      "cmd2": [
+        "-", 
+        0
+      ]
+    }
+  ], 
+  "data": {
+    "instrument_type": "pulse", 
+    "vibrato": {
+      "direction": "down", 
+      "type": "hf"
+    }, 
+    "sound_length": 0, 
+    "table_on": true, 
+    "envelope": 245, 
+    "sweep": 255, 
+    "wave": "25%", 
+    "phase_transpose": 0, 
+    "has_sound_length": false, 
+    "phase_finetune": 0, 
+    "automate": false, 
+    "automate_2": false, 
+    "pan": "LR"
+  }, 
+  "name": "\u0000\u0000\u0000\u0000\u0000"
+}
