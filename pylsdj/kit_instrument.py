@@ -128,6 +128,15 @@ class KitInstrument(Instrument, VibratoMixin):
     def dist_type(self, value):
         self.data.dist_type = value
 
+    @property
+    def half_speed(self):
+        """if true, play samples at half their normal speed"""
+        return self.data.half_speed
+
+    @half_speed.setter
+    def half_speed(self, value):
+        self.data.half_speed = value
+
     def import_lsdinst(self, lsdinst_struct):
         super(PulseInstrument, self).import_lsdinst(lsdinst_struct)
 
