@@ -22,6 +22,8 @@ from clock import Clock, TotalClock
 
 import StringIO
 
+from exceptions import ImportException
+
 # Number of channels
 NUM_CHANNELS = 4
 
