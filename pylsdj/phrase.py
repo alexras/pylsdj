@@ -1,5 +1,4 @@
-from utils import add_song_data_property, ObjectLookupDict
-
+from utils import ObjectLookupDict
 
 class Phrase(object):
 
@@ -28,10 +27,17 @@ class Phrase(object):
         """a list of Instruments, None where no instrument is defined"""
         return self._instruments
 
-for property_name, doc in [
-        ("notes", "a list of the phrase's notes, one byte per note"),
-        ("fx", "a list of the phrase's effects, one byte per effect"),
-        ("fx_val", "a list of the phrase's effect parameters, "
-         "one byte per effect")]:
-    add_song_data_property(Phrase, property_name, ("phrase_" + property_name,),
-                           use_index=True, doc=doc)
+    @property
+    def notes(self):
+        """a list of the phrase's notes, one byte per note"""
+        return self.song.song_data.phrase_notes[self._index]
+
+    @property
+    def fx(self):
+        """a list of the phrase's effects, one byte per effect"""
+        return self.song.song_data.phrase_fx[self._index]
+
+    @property
+    def fx_val(self):
+        """a list of the phrase's effect parameters, one byte per effect"""
+        return self.song.song_data.phrase_fx_val[self._index]

@@ -1,5 +1,3 @@
-from utils import add_song_data_property
-
 # Max. length of a word name
 WORD_NAME_LENGTH = 4
 
@@ -25,11 +23,20 @@ class Word(object):
     def index(self):
         return self._index
 
-add_song_data_property(Word, 'name', ("word_names", ), use_index=True,
-                       doc="the word's name")
-add_song_data_property(Word, 'sounds', ("words", ), use_index=True,
-                       doc="a list of the sounds that make up the word; "
-                       "each sound has an ``allophone`` and a ``length``")
+    @property
+    def name(self):
+        """the word's name"""
+        return self._song.song_data.word_names[self._index]
+
+    @name.setter
+    def name(self, value):
+        self._song.song_data.word_names[self._index] = value
+
+    @property
+    def sounds(self):
+        """a list of the sounds that make up the word; each sound has
+        an ``allophone`` and a ``length``"""
+        return self._song.song_data.words[self._index]
 
 
 class SpeechInstrument(object):
