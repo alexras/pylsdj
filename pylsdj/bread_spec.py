@@ -324,27 +324,31 @@ softsynth = [
     b.padding(8 * 3)
 ]
 
+FX_COMMANDS = {
+    0: '-',
+    1: 'A',
+    2: 'C',
+    3: 'D',
+    4: 'E',
+    5: 'F',
+    6: 'G',
+    7: 'H',
+    8: 'K',
+    9: 'L',
+    10: 'M',
+    11: 'O',
+    12: 'P',
+    13: 'R',
+    14: 'S',
+    15: 'T',
+    16: 'V',
+    17: 'W',
+    18: 'Z'
+}
+
 table_command = [
-    ("fx", b.array(NUM_TABLES, b.array(STEPS_PER_TABLE, b.enum(8, {
-        0: '-',
-        1: 'A',
-        2: 'C',
-        4: 'E',
-        5: 'F',
-        6: 'G',
-        7: 'H',
-        8: 'K',
-        9: 'L',
-        10: 'M',
-        11: 'O',
-        12: 'P',
-        13: 'R',
-        14: 'S',
-        15: 'T',
-        16: 'V',
-        17: 'W',
-        18: 'Z'
-    })))),
+    ("fx", b.array(NUM_TABLES,
+                   b.array(STEPS_PER_TABLE, b.enum(8, FX_COMMANDS)))),
     ("val", b.array(NUM_TABLES, b.array(STEPS_PER_TABLE, b.byte)))
 ]
 
@@ -497,7 +501,8 @@ song = [
     ("wave_synth_overwrite_lock", b.array(2, b.byte)),
     b.padding(8 * 58),
     # Beginning of bank 2
-    ("phrase_fx", b.array(NUM_PHRASES, b.array(STEPS_PER_PHRASE, b.byte))),
+    ("phrase_fx", b.array(NUM_PHRASES, b.array(
+        STEPS_PER_PHRASE, b.enum(8, FX_COMMANDS)))),
     ("phrase_fx_val", b.array(NUM_PHRASES, b.array(STEPS_PER_PHRASE, b.byte))),
     b.padding(32 * 8),
     # Beginning of bank 3
