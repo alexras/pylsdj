@@ -11,6 +11,8 @@ import collections
 import bitstring
 from . import exceptions
 
+from .vendor.six.moves import range
+
 # By default, SAV file loading doesn't trigger any callback action
 
 

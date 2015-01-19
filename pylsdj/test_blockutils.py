@@ -2,6 +2,7 @@ import os
 import sys
 import json
 from nose.tools import assert_equal, assert_list_equal
+from .vendor.six.moves import range
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 

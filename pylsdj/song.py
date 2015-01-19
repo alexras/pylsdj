@@ -22,6 +22,8 @@ from .clock import Clock, TotalClock
 
 from .exceptions import ImportException
 
+from .vendor.six.moves import range
+
 # Number of channels
 NUM_CHANNELS = 4
 

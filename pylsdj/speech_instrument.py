@@ -1,3 +1,5 @@
+from .vendor.six.moves import range
+
 # Max. length of a word name
 WORD_NAME_LENGTH = 4
 

@@ -1,5 +1,7 @@
 import bread as b
 
+from .vendor.six.moves import range
+
 def padded_hex(pad_count):
     return lambda x: ("0x%%0%dx" % (pad_count)) % (x)
 

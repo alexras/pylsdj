@@ -1,6 +1,6 @@
 import os
 import tempfile
-
+from .vendor.six.moves import range
 
 def printable_decimal_and_hex(num):
     return "{0:d} (0x{0:x})".format(num)

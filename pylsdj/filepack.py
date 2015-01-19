@@ -1,5 +1,7 @@
 import itertools
 
+from .vendor.six.moves import range
+
 # Byte used to denote run-length encoding
 RLE_BYTE = 0xc0
 

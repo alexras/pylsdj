@@ -6,6 +6,7 @@ from . import bread_spec
 
 from .synth import Synth
 
+from .vendor.six.moves import range
 
 class WaveInstrument(Instrument, VibratoMixin):
 

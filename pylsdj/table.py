@@ -1,5 +1,5 @@
 from .bread_spec import STEPS_PER_TABLE
-
+from .vendor.six.moves import range
 
 class TableFX(object):
 
