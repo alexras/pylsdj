@@ -20,7 +20,7 @@ def load_lsdsng(filename):
 
     with open(filename, 'rb') as fp:
         # Skip the preamble this time around
-        fp.seek(len(preamble_data) / 8)
+        fp.seek(int(len(preamble_data) / 8))
 
         # Load compressed data into a block map and use BlockReader to
         # decompress it

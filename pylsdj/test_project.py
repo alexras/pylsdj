@@ -19,7 +19,7 @@ def test_save_load_lsdsng():
 
     proj = load_lsdsng(sample_song_compressed)
 
-    expected_song_name = "UNTOLDST"
+    expected_song_name = b"UNTOLDST"
     expected_song_version = 23
 
     assert_equal(proj.name, expected_song_name)
@@ -75,7 +75,7 @@ def test_block_remap_required():
 
     proj = load_lsdsng(block_remap_song)
 
-    assert_equal("ANNARKTE", proj.name)
+    assert_equal(b"ANNARKTE", proj.name)
     assert_equal(3, proj.version)
     assert_equal(4, proj.size_blks)
 

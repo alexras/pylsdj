@@ -85,7 +85,7 @@ class SAVFile(object):
         except bitstring.ReadError as e:
             raise exceptions.ImportException(e)
 
-        if self.header_block.sram_init_check != 'jk':
+        if self.header_block.sram_init_check != b'jk':
             error_msg = (
                 "SRAM init check bits incorrect (should be 'jk', was '%s')" %
                 (self.header_block.sram_init_check))

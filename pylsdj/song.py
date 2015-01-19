@@ -283,9 +283,9 @@ class Song(object):
 
     def __init__(self, song_data):
         # Check checksums
-        assert song_data.mem_init_flag_1 == 'rb'
-        assert song_data.mem_init_flag_2 == 'rb'
-        assert song_data.mem_init_flag_3 == 'rb'
+        assert song_data.mem_init_flag_1 == b'rb'
+        assert song_data.mem_init_flag_2 == b'rb'
+        assert song_data.mem_init_flag_3 == b'rb'
 
         # Everything we do to the song or any of its components should update
         # the song data object, so that we can rely on bread's writer to write

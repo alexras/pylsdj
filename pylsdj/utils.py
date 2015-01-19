@@ -36,7 +36,7 @@ def name_without_zeroes(name):
     :param name: the name from which to strip zeroes
     :rtype: the name, without trailing zeroes
     """
-    first_zero = name.find('\0')
+    first_zero = name.find(b'\0')
 
     if first_zero == -1:
         return name
