@@ -10,3 +10,4 @@ lib/
 man/
 .coverage
 cover/
+.tox
