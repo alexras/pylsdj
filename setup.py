@@ -19,6 +19,6 @@ setup(name='pylsdj',
           'Topic :: Software Development :: Libraries :: Python Modules'],
       license='MIT',
       packages=['pylsdj', 'pylsdj.vendor'],
-      requires=['bread>=1.5.4'],
+      requires=['bread'],
       install_requires=['bread>=1.5.4'],
       zip_safe=False)
