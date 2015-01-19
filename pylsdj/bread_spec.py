@@ -279,7 +279,7 @@ INSTRUMENT_TYPE_CODE = {
 
 instrument = [
     ("instrument_type", b.enum(
-        8, dict([(v, k) for (k, v) in INSTRUMENT_TYPE_CODE.items()]),
+        8, dict([(v, k) for (k, v) in list(INSTRUMENT_TYPE_CODE.items())]),
         default="invalid")),
     (b.CONDITIONAL, "instrument_type", {
         "pulse": pulse_instrument,
@@ -422,10 +422,9 @@ word_sound = [
 # in a phrase's `notes` field
 NOTES = ['---']
 
-for i in xrange(0x3, 0x10):
+for i in range(0x3, 0x10):
     NOTES.extend(
-        map(lambda x: '%s%X' % (x.ljust(2, ' '), i),
-            ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B')))
+        ['%s%X' % (x.ljust(2, ' '), i) for x in ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B')])
 
 NOTES_DICT = {}
 

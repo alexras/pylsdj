@@ -1,10 +1,10 @@
-from instrument import Instrument
-from instrument_mixins import VibratoMixin
-from exceptions import ImportException
+from .instrument import Instrument
+from .instrument_mixins import VibratoMixin
+from .exceptions import ImportException
 
-import bread_spec
+from . import bread_spec
 
-from synth import Synth
+from .synth import Synth
 
 
 class WaveInstrument(Instrument, VibratoMixin):

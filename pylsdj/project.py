@@ -1,11 +1,10 @@
 import math
 import bread
-import bread_spec as spec
-from song import Song
-import StringIO
-import filepack
-import blockutils
-from blockutils import BlockReader, BlockWriter, BlockFactory
+from . import bread_spec as spec
+from .song import Song
+from . import filepack
+from . import blockutils
+from .blockutils import BlockReader, BlockWriter, BlockFactory
 
 
 def load_lsdsng(filename):
@@ -149,9 +148,4 @@ class Project(object):
         return self._song_data == other._song_data
 
     def __str__(self):
-        out_str = StringIO.StringIO()
-        print >>out_str, "<%s, %d>" % (self.name, self.version)
-
-        string = out_str.getvalue()
-        out_str.close()
-        return string
+        return "<%s, %d>\n" % (self.name, self.version)

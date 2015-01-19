@@ -46,7 +46,7 @@ class SpeechInstrument(object):
 
         self._words = [
             Word(self._song, i) for i in
-            xrange(len(self._song.song_data.words))]
+            range(len(self._song.song_data.words))]
 
     @property
     def song(self):

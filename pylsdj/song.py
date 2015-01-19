@@ -1,28 +1,26 @@
 import json
 
-from utils import assert_index_sane
+from .utils import assert_index_sane
 import bread
-import bread_spec
+from . import bread_spec
 
-from synth import Synth
-from table import Table
-from phrase import Phrase
-from chain import Chain
-from speech_instrument import SpeechInstrument
+from .synth import Synth
+from .table import Table
+from .phrase import Phrase
+from .chain import Chain
+from .speech_instrument import SpeechInstrument
 
-from wave_instrument import WaveInstrument
-from pulse_instrument import PulseInstrument
-from kit_instrument import KitInstrument
-from noise_instrument import NoiseInstrument
+from .wave_instrument import WaveInstrument
+from .pulse_instrument import PulseInstrument
+from .kit_instrument import KitInstrument
+from .noise_instrument import NoiseInstrument
 
-from bread_spec import INSTRUMENT_TYPE_CODE
-from filepack import DEFAULT_INSTRUMENT
+from .bread_spec import INSTRUMENT_TYPE_CODE
+from .filepack import DEFAULT_INSTRUMENT
 
-from clock import Clock, TotalClock
+from .clock import Clock, TotalClock
 
-import StringIO
-
-from exceptions import ImportException
+from .exceptions import ImportException
 
 # Number of channels
 NUM_CHANNELS = 4
@@ -35,7 +33,7 @@ class AllocTable(object):
 
         self.access_objects = []
 
-        for index in xrange(len(alloc_table)):
+        for index in range(len(alloc_table)):
             self.access_objects.append(object_class(song, index))
 
     def __getitem__(self, index):
@@ -54,7 +52,7 @@ class AllocTable(object):
 
     def as_list(self):
         l = []
-        for i in xrange(len(self.alloc_table)):
+        for i in range(len(self.alloc_table)):
             if not self.alloc_table[i]:
                 l.append(None)
             else:
@@ -89,7 +87,7 @@ class Instruments(object):
         self.alloc_table = song.song_data.instr_alloc_table
         self.access_objects = []
 
-        for index in xrange(len(self.alloc_table)):
+        for index in range(len(self.alloc_table)):
             instr_type = self.song.song_data.instruments[index].instrument_type
 
             self.access_objects.append(
@@ -238,25 +236,27 @@ class Sequence(object):
             setattr(self.song.song_data.song[index], channel, chain_number)
 
     def __str__(self):
-        output_str = StringIO.StringIO()
+        output_str = ''
 
-        print >>output_str, "   PU1 PU2 WAV NOI"
+        def add_line(line):
+            output_str += line + '\n'
+
+
+        add_line("   PU1 PU2 WAV NOI")
 
         for i, row in enumerate(self.song.song_data.song):
-            print >>output_str, "%02x" % (i),
+            add_line("%02x" % (i), end=' ')
 
             for channel in ["pu1", "pu2", "wav", "noi"]:
                 chain_number = getattr(row, channel)
 
                 if chain_number == Sequence.NO_CHAIN:
-                    print >>output_str, " --",
+                    add_line(" --", end=' ')
                 else:
-                    print >>output_str, " %02x" % (getattr(row, channel)),
-            print >>output_str, ""
+                    add_line(" %02x" % (getattr(row, channel)), end=' ')
+            add_line("")
 
-        string = output_str.getvalue()
-        return string
-
+        return output_str
 
 class Synths(object):
 
@@ -264,7 +264,7 @@ class Synths(object):
         self.song = song
         self.access_objects = []
 
-        for index in xrange(bread_spec.NUM_SYNTHS):
+        for index in range(bread_spec.NUM_SYNTHS):
             self.access_objects.append(Synth(self.song, index))
 
     def __getitem__(self, index):
@@ -319,14 +319,7 @@ class Song(object):
         self._sequence = Sequence(self)
 
     def __str__(self):
-        output_str = StringIO.StringIO()
-
-        print >>output_str, str(self.sequence)
-
-        string = output_str.getvalue()
-        output_str.close()
-
-        return string
+        return str(self.sequence)
 
     @property
     def instruments(self):

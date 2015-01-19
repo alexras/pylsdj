@@ -1,7 +1,7 @@
 import os
 from nose.tools import assert_equal
 
-from project import load_lsdsng
+from .project import load_lsdsng
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -13,9 +13,9 @@ def test_read_clocks():
     project_clock = proj.song.clock
     total_clock = proj.song.global_clock
 
-    print project_clock
-    print total_clock
-    print total_clock.checksum
+    print(project_clock)
+    print(total_clock)
+    print(total_clock.checksum)
 
     assert_equal(5, project_clock.hours)
     assert_equal(47, project_clock.minutes)

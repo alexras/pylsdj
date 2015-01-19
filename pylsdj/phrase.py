@@ -1,4 +1,4 @@
-from utils import ObjectLookupDict
+from .utils import ObjectLookupDict
 
 # Need to define a custom lookup dict so that index=255 is treated as unset and
 # doesn't throw an exception

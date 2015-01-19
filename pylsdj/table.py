@@ -1,4 +1,4 @@
-from bread_spec import STEPS_PER_TABLE
+from .bread_spec import STEPS_PER_TABLE
 
 
 class TableFX(object):
@@ -39,9 +39,9 @@ class Table(object):
         self._index = index
 
         self._fx1 = [TableFX(self._song.song_data.table_cmd1, self._index, i)
-                     for i in xrange(STEPS_PER_TABLE)]
+                     for i in range(STEPS_PER_TABLE)]
         self._fx2 = [TableFX(self._song.song_data.table_cmd2, self._index, i)
-                     for i in xrange(STEPS_PER_TABLE)]
+                     for i in range(STEPS_PER_TABLE)]
 
     def __eq__(self, other):
         return self._fx1 == other._fx1 and self._fx2 == other._fx2
@@ -81,7 +81,7 @@ class Table(object):
     def export(self):
         export_struct = []
 
-        for i in xrange(STEPS_PER_TABLE):
+        for i in range(STEPS_PER_TABLE):
             export_struct.append({
                 "volume": self.envelopes[i],
                 "transpose": self.transposes[i],

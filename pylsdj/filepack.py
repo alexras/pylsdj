@@ -147,10 +147,10 @@ def renumber_block_keys(blocks):
     # There is an implicit block switch to the 0th block at the start of the
     # file
     byte_switch_keys = [0]
-    block_keys = blocks.keys()
+    block_keys = list(blocks.keys())
 
     # Scan the blocks, recording every block switch statement
-    for block in blocks.values():
+    for block in list(blocks.values()):
         i = 0
         while i < len(block.data) - 1:
             current_byte = block.data[i]
@@ -191,7 +191,7 @@ def renumber_block_keys(blocks):
 
     new_block_map = {}
 
-    for block_key, byte_switch_key in itertools.izip(
+    for block_key, byte_switch_key in zip(
             block_keys, byte_switch_keys):
 
         new_block_map[byte_switch_key] = blocks[block_key]
@@ -277,7 +277,7 @@ def pad(segment, size):
     :param segment: the segment to pad
     :param size: the size to which to pad the segment
     """
-    for i in xrange(size - len(segment)):
+    for i in range(size - len(segment)):
         segment.append(0)
 
     assert len(segment) == size
@@ -369,7 +369,7 @@ def compress(raw_data):
     while index < data_size:
         current_byte = raw_data[index]
 
-        for i in xrange(3):
+        for i in range(3):
             if index < data_size - (i + 1):
                 next_bytes[i] = raw_data[index + (i + 1)]
             else:

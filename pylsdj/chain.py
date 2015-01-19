@@ -1,4 +1,4 @@
-from utils import ObjectLookupDict
+from .utils import ObjectLookupDict
 
 
 class Chain(object):

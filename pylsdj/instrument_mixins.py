@@ -1,4 +1,4 @@
-from vibrato import Vibrato
+from .vibrato import Vibrato
 
 
 class EnvelopeMixin(object):

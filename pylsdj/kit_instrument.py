@@ -1,5 +1,5 @@
-from instrument import Instrument
-from instrument_mixins import VibratoMixin
+from .instrument import Instrument
+from .instrument_mixins import VibratoMixin
 
 
 class KitInstrument(Instrument, VibratoMixin):

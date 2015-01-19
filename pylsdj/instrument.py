@@ -1,4 +1,4 @@
-from utils import assert_index_sane
+from .utils import assert_index_sane
 import json
 
 
@@ -91,7 +91,7 @@ class Instrument(object):
 
         data_json = json.loads(self.data.as_json())
 
-        for key, value in data_json.items():
+        for key, value in list(data_json.items()):
             if key[0] != '_' and key not in ('synth', 'table'):
                 export_struct['data'][key] = value
 

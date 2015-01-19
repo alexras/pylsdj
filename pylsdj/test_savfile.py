@@ -5,7 +5,7 @@ from nose.tools import assert_equal, with_setup
 sys.path.append(
     os.path.dirname(os.path.abspath(os.path.join(__file__, os.path.pardir))))
 
-import savfile as savfile
+from . import savfile as savfile
 
 SAV_IN = os.path.join(os.path.dirname(__file__), "test_data", "lsdj.sav")
 SAV_OUT = os.path.join(os.path.dirname(__file__), "lsdj.sav.out")
@@ -23,10 +23,10 @@ def teardown():
 
 @with_setup(setup, teardown)
 def test_project_save_load():
-    print "Loading..."
+    print("Loading...")
     sav = savfile.SAVFile(SAV_IN)
 
-    print "Saving..."
+    print("Saving...")
     sav.save(SAV_OUT)
 
     new_sav = savfile.SAVFile(SAV_OUT)

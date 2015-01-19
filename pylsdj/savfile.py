@@ -1,16 +1,15 @@
-import bread_spec
+from . import bread_spec
 import bread
 import os
 import sys
-import utils
-from StringIO import StringIO
-from project import Project
-import blockutils
-from blockutils import BlockReader, BlockWriter, BlockFactory
-import filepack
+from . import utils
+from .project import Project
+from . import blockutils
+from .blockutils import BlockReader, BlockWriter, BlockFactory
+from . import filepack
 import collections
 import bitstring
-import exceptions
+from . import exceptions
 
 # By default, SAV file loading doesn't trigger any callback action
 
@@ -83,7 +82,7 @@ class SAVFile(object):
         try:
             self.header_block = bread.parse(
                 header_block_data, bread_spec.compressed_sav_file)
-        except bitstring.ReadError, e:
+        except bitstring.ReadError as e:
             raise exceptions.ImportException(e)
 
         if self.header_block.sram_init_check != 'jk':
@@ -157,26 +156,28 @@ class SAVFile(object):
 
             current_step += 1
 
-        for i in xrange(self.NUM_FILES):
+        for i in range(self.NUM_FILES):
             if i not in self.projects:
                 self.projects[i] = None
 
         callback("Import complete!", total_steps, total_steps, True)
 
     def __str__(self):
+        output_str = ''
+
+        def add_line(line):
+            output_str += line + '\n'
 
         str_stream = StringIO()
 
-        for i, project in self.projects.items():
+        for i, project in list(self.projects.items()):
             if project is not None:
-                print >>str_stream, str(project)
+                add_line(str(project), file=str_stream)
 
-        print >>str_stream, "Active Project: %s" % \
-            (self.projects[self.active_project_number])
+        add_line("Active Project: %s" % \
+            (self.projects[self.active_project_number]), file=str_stream)
 
-        str_stream_stringval = str_stream.getvalue()
-        str_stream.close()
-        return str_stream_stringval
+        return output_str
 
     def __eq__(self, other):
         return self.projects == other.projects
@@ -204,14 +205,14 @@ class SAVFile(object):
 
         block_table = []
 
-        for i in xrange(num_blocks):
+        for i in range(num_blocks):
             block_table.append(None)
 
         # First block is the header block, so we should ignore it when creating
         # the block allocation table
         block_table[0] = -1
 
-        for (i, project) in self.projects.items():
+        for (i, project) in list(self.projects.items()):
             current_step += 1
 
             if project is None:
@@ -239,7 +240,7 @@ class SAVFile(object):
 
         empty_project_name = '\0' * self.FILENAME_LENGTH
 
-        for i, project in self.projects.items():
+        for i, project in list(self.projects.items()):
             if project is None:
                 self.header_block.filenames[i] = empty_project_name
                 self.header_block.file_versions[i] = 0
@@ -268,12 +269,12 @@ class SAVFile(object):
         block_map = factory.blocks
 
         empty_block_data = []
-        for i in xrange(blockutils.BLOCK_SIZE):
+        for i in range(blockutils.BLOCK_SIZE):
             empty_block_data.append(0)
 
         callback("Writing data to file", current_step, total_steps, True)
         current_step += 1
-        for i in xrange(num_blocks):
+        for i in range(num_blocks):
             if i in block_map:
                 data_list = block_map[i].data
             else:

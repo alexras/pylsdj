@@ -2,7 +2,7 @@ import os
 
 from nose.tools import assert_equal
 
-from project import load_lsdsng
+from .project import load_lsdsng
 
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 

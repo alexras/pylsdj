@@ -1,5 +1,5 @@
-from instrument import Instrument
-from instrument_mixins import SoundLengthMixin, EnvelopeMixin, SweepMixin
+from .instrument import Instrument
+from .instrument_mixins import SoundLengthMixin, EnvelopeMixin, SweepMixin
 
 MIXINS = [SoundLengthMixin, EnvelopeMixin, SweepMixin]
 

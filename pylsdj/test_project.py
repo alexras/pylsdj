@@ -8,9 +8,9 @@ SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 sys.path.append(os.path.join(SCRIPT_DIR, os.path.pardir))
 
-import filepack as filepack
-from project import Project, load_lsdsng, load_srm
-from utils import temporary_file
+from . import filepack as filepack
+from .project import Project, load_lsdsng, load_srm
+from .utils import temporary_file
 
 
 def test_save_load_lsdsng():
