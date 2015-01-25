@@ -39,6 +39,10 @@ class Instrument(object):
         """the instrument's type (``pulse``, ``wave``, ``kit`` or ``noise``)"""
         return self.data.instrument_type
 
+    @type.setter
+    def type(self, value):
+        self.data.instrument_type = value
+
     @property
     def table(self):
         """a ```pylsdj.Table``` referencing the instrument's table, or None
