@@ -117,7 +117,13 @@ class Project(object):
             writer = BlockWriter()
             factory = BlockFactory()
 
-            preamble_data = bread.write(self._song_data)
+            preamble_dummy_bytes = bytearray([0] * 9)
+            preamble = bread.parse(
+                preamble_dummy_bytes, spec.lsdsng_preamble)
+            preamble.name = self.name
+            preamble.version = self.version
+
+            preamble_data = bread.write(preamble)
             raw_data = self.get_raw_data()
             compressed_data = filepack.compress(raw_data)
 
