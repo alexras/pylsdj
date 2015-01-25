@@ -139,9 +139,9 @@ pulse_instrument = [
         3: "LR"
     })),
     b.padding(2 * 8),
-    ("_default_instr_byte_1", b.byte, {"str_format": padded_hex(2)}),
+    ("xx_default_instr_byte_1", b.byte, {"str_format": padded_hex(2)}),
     b.padding(3 * 8),
-    ("_default_instr_byte_2", b.byte, {"str_format": padded_hex(2)}),
+    ("xx_default_instr_byte_2", b.byte, {"str_format": padded_hex(2)}),
     b.padding(8)
 ]
 
