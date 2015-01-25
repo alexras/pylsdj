@@ -15,7 +15,7 @@ def test_read_clocks():
 
     print(project_clock)
     print(total_clock)
-    print(total_clock.checksum)
+    print((total_clock.checksum))
 
     assert_equal(5, project_clock.hours)
     assert_equal(47, project_clock.minutes)
