@@ -20,5 +20,5 @@ setup(name='pylsdj',
       license='MIT',
       packages=['pylsdj', 'pylsdj.vendor'],
       requires=['bread'],
-      install_requires=['bread>=1.5.4'],
+      install_requires=['bread>=2.1.0'],
       zip_safe=False)
