@@ -57,6 +57,9 @@ class ProjectList(object):
     def __setitem__(self, file_number, proj):
         self._projects[item] = proj
 
+    def keys(self):
+        return range(NUM_FILES)
+
     def _read_project(self, fp, file_number):
         # Scan the block allocation table for blocks for this project
         # Block 0 is reserved, so block numbers are assumed off-by-one
