@@ -91,17 +91,41 @@ class Project(object):
         self.version = version
         """the project's version (incremented on every save in LSDJ)"""
 
-        self._song_data = bread.parse(data, spec.song)
-
-        self.song = Song(self._song_data)
-        """the song associated with the project"""
-
         self.size_blks = size_blks
         """the size of the song in filesystem blocks"""
 
         # Useful for applications tracking whether a project was modified since
         # it was loaded.
         self.modified = False
+
+        # Since parsing the song is expensive, we'll load it lazily from the
+        # raw data on-demand
+        self.__song_data = None
+        self._song = None
+        self._raw_bytes = data
+
+    @property
+    def _song_data(self):
+        if self.__song_data is None:
+            self.__song_data = bread.parse(self._raw_bytes, spec.song)
+
+        return self.__song_data
+
+    @_song_data.setter
+    def _song_data(self, value):
+        self.__song_data = value
+
+    @property
+    def song(self):
+        """the song associated with the project"""
+        if self._song is None:
+            self._song = Song(self._song_data)
+
+        return self._song
+
+    @song.setter
+    def song(self, value):
+        self._song = value
 
     def get_raw_data(self):
         return bread.write(self._song_data, spec.song)
