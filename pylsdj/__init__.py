@@ -1,5 +1,5 @@
 __title__ = 'pylsdj'
-__version__ = '2.3.0'
+__version__ = '2.3.1'
 __author__ = 'Alex Rasmussen'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2015 Alex Rasmussen'
