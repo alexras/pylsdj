@@ -495,7 +495,9 @@ song = [
     ("file_changed", b.byte),
     ("power_save", b.byte),
     ("prelisten", b.byte),
-    ("wave_synth_overwrite_lock", b.array(2, b.byte)),
+    # One overwrite lock per synth, true if the wave overwrites the synth's
+    # parameters; stored in reverse order (synth f .. 0)
+    ("wave_synth_overwrite_locks", b.array(NUM_SYNTHS, b.boolean)),
     b.padding(8 * 58),
     # Beginning of bank 2
     ("phrase_fx", b.array(NUM_PHRASES, b.array(

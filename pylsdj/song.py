@@ -291,7 +291,7 @@ for field, doc in [("tempo", "the song's tempo"),
                    ("prelisten", "if non-zero, play notes and instruments "
                     "while entering them"),
                    ("bookmarks", "list of screen bookmarks"),
-                   ("wave_synth_overwrite_lock", None)]:
+                   ("wave_synth_overwrite_locks", None)]:
     def field_getter(this):
         return getattr(this.song_data, field)
 
