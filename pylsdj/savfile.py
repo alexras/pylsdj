@@ -55,7 +55,7 @@ class ProjectList(object):
         return self._projects[file_number]
 
     def __setitem__(self, file_number, proj):
-        self._projects[item] = proj
+        self._projects[file_number] = proj
 
     def keys(self):
         return range(NUM_FILES)
