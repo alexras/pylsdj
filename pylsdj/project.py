@@ -175,7 +175,10 @@ class Project(object):
             fp.write(raw_data)
 
     def __eq__(self, other):
-        return self._song_data == other._song_data
+        if other is None:
+            return False
+        else:
+            return self._song_data == other._song_data
 
     def __ne__(self, other):
         return not self.__eq__(other)
