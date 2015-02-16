@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='pylsdj',
-      version='2.3.2',
+      version='2.3.3',
       description='A utility belt for dealing with LSDJ-related files',
       url='http://github.com/alexras/pylsdj',
       author='Alex Rasmussen',
