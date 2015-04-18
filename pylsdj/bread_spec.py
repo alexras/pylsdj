@@ -341,7 +341,12 @@ FX_COMMANDS = {
     15: 'T',
     16: 'V',
     17: 'W',
-    18: 'Z'
+    18: 'Z',
+    # Arduinoboy-specific
+    19: 'N',
+    20: 'X',
+    21: 'Q',
+    22: 'Y'
 }
 
 table_command = [
