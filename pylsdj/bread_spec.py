@@ -41,7 +41,7 @@ sample_kit = [
     ("force_loop", b.array(15, b.bit)),
     # n/a?
     b.padding(8 * 2),
-    # 4 bits per sample at 11468Hz, in chunks of 16 bytes
+    # 8 bits per sample at 11468Hz, in chunks of 16 bytes
     ("sample_data", b.array(127, b.array(128, b.nibble)))
 ]
 
