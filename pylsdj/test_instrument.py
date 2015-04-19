@@ -52,3 +52,9 @@ def test_load_store_noise_instrument():
         os.path.join(SCRIPT_DIR, 'test_data', 'ANNARKTE.lsdsng'),
         os.path.join(SCRIPT_DIR, 'test_data', 'ANNARKTE_0x06_noise.lsdinst'),
         0x06)
+
+def test_load_store_arduinoboy():
+    _test_load_store_instrument(
+        os.path.join(SCRIPT_DIR, 'test_data', 'ARDBOYxx.lsdsng'),
+        os.path.join(SCRIPT_DIR, 'test_data', 'MIDI.lsdinst'),
+        0x01)

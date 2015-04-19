@@ -86,6 +86,10 @@ def test_srm_load():
     proj = load_srm(srm_song)
     assert_equal("CLICK", proj.song.instruments[0].name)
 
+    assert_equal(0x10, proj.song.sequence[0]['pu1'].index)
+    assert_equal(0x05, proj.song.sequence[4]['noi'].index)
+
+
 
 def test_save_load_srm():
     srm_song = os.path.join(SCRIPT_DIR, "test_data", "sample.srm")
