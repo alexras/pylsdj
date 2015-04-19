@@ -46,6 +46,27 @@ class AllocTable(object):
     def __len__(self):
         return len(self.alloc_table)
 
+    def __str__(self):
+        grid_width = 16
+
+        column = 0
+        grid = ""
+
+        for i, cell in enumerate(self.alloc_table):
+            if column == 0:
+                grid += '%03x' % (i / grid_width) + ': '
+            if cell:
+                grid += '1'
+            else:
+                grid += '0'
+
+            if i > 0 and column == grid_width - 1:
+                grid += '\n'
+
+            column = (column + 1) % grid_width
+
+        return grid
+
     def as_list(self):
         l = []
         for i in range(len(self.alloc_table)):
