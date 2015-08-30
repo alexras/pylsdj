@@ -534,14 +534,21 @@ SAMPLES_PER_KIT = 15
 KIT_SAMPLE_NAME_LENGTH = 3
 KIT_NAME_LENGTH = 6
 
+# When a kit is mapped into memory, it's mapped starting at 0x4000. All sample
+# end positions are specified relative to the start of the sample in that
+# memory map, which happens to be 0x4060
+SAMPLE_START_ADDRESS = 0x4060
+
+MAX_SAMPLE_LENGTH = 0x3fa0
+
+
 def hex_array(x):
     return str(map(hex, x))
 
 # Individual kit layout
 lsdj_rom_kit = [
-    { "endianness": b.LITTLE_ENDIAN },
     ("magic_number", b.array(2, b.uint8), { "str_format": hex_array }), # should be 0x60, 0x40
-    ("sample_ends", b.array(SAMPLES_PER_KIT, b.uint16)),
+    ("sample_ends", b.array(SAMPLES_PER_KIT, b.uint16), {"endianness": b.LITTLE_ENDIAN, "offset": - SAMPLE_START_ADDRESS}),
     ("zeroes_1", b.uint16, { "str_format": hex }), # should be 0
     ("sample_names", b.array(SAMPLES_PER_KIT, b.string(KIT_SAMPLE_NAME_LENGTH))), # when entering less than 3 chars, pad with '-'
     ("zeroes_2", b.uint8, { "str_format": hex }), # should be 0
@@ -550,7 +557,7 @@ lsdj_rom_kit = [
     b.padding(4 * 8), # documented as 'N / A?'
     ("force_loop", b.array(SAMPLES_PER_KIT + 1, b.boolean)), # MSB not used
     b.padding(2 * 8), # documented as 'N / A?'
-    ("sample_data", b.array(16288 * 2, b.intX(4, True)))
+    ("sample_data", b.array((MAX_SAMPLE_LENGTH) * 2, b.intX(4, False)))
 ]
 
 # LSDJ kits layout in ROM
