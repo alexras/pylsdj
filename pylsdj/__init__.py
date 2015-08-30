@@ -23,6 +23,6 @@ from .speech_instrument import Word, SpeechInstrument
 from .synth import Synth, SynthSoundParams
 from .table import Table, TableFX
 from .vibrato import Vibrato
-from .kits import Kits, Kit
+from .kits import Kits, Kit, KitSample
 from . import exceptions
 from . import utils

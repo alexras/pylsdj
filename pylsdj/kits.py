@@ -22,7 +22,13 @@ WAVE_PARAMS = (WAVE_NUM_CHANNELS, WAVE_SAMPLE_WIDTH, WAVE_FRAMERATE, 0,
 
 
 class Kits(object):
+    """A wrapper for an LSDJ ROM's kits"""
+
     def __init__(self, rom_file):
+        """Load kits from the provided LSDJ ROM
+
+        :param rom_file: path to the LSDJ ROM to load
+        """
         with open(rom_file, 'rb') as fp:
             self._data = b.parse(fp, lsdj_rom_kits)
 
@@ -42,6 +48,8 @@ class Kits(object):
 
 
 class Kit(object):
+    """An individual sample kit"""
+
     def __init__(self, data):
         self._data = data
 
@@ -163,10 +171,12 @@ class KitSample(object):
 
     @property
     def used(self):
+        """True if the sample's memory is in use, false otherwise"""
         return self._sample_used(self.index)
 
     @property
     def sample_data(self):
+        """The raw hex nibbles that comprise the sample"""
         return self._get_sample_data(self.index)
 
     @sample_data.setter
@@ -212,6 +222,7 @@ class KitSample(object):
 
     @property
     def length(self):
+        """the length of the sample, in bytes"""
         sample_start, sample_end = self._get_sample_data_bounds()
         return (sample_end - sample_start + 1) * 4
 
